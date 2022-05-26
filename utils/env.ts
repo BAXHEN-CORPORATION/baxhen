@@ -1,0 +1,10 @@
+export const NEXTAUTH_URL = process.env.NEXTAUTH_URL || "";
+export const BASE_URL = process.env.BASE_URL || "";
+export const NEXTAUTH_SECRET = process.env.NEXTAUTH_SECRET || "";
+export const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID || "";
+export const GOOGLE_SECRET = process.env.GOOGLE_SECRET || "";
+export const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID || "";
+export const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET || "";
+export const LINKEDIN_CLIENT_ID = process.env.LINKEDIN_CLIENT_ID || "";
+export const LINKEDIN_CLIENT_SECRET = process.env.LINKEDIN_CLIENT_SECRET || "";
+export const MONGODB_URI = process.env.MONGODB_URI || "";
