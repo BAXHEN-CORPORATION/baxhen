@@ -141,6 +141,10 @@ const signInContent = {
     noProvider: "No active provider",
     signInText: "Login for access in the following ways:",
   },
+  tl: {
+    noProvider: "Walang aktibong provider",
+    signInText: "Mag-login para sa pag-access sa mga sumusunod na paraan:",
+  },
   pt: {
     noProvider: "Nenhum provider ativo",
     signInText: "Faça login para acesso nos seguintes meios:",
