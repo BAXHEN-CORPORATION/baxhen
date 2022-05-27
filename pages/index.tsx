@@ -8,7 +8,7 @@ const Home: NextPage = () => {
   const router = useRouter();
 
   React.useEffect(() => {
-    router.push("/auth/sigin");
+    router.push("/auth/signin");
   }, []);
 
   return (
