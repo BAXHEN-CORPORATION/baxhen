@@ -1,8 +1,16 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import BasicLayout from "layout/Basic";
+import React from "react";
+import { useRouter } from "next/router";
 
 const Home: NextPage = () => {
+  const router = useRouter();
+
+  React.useEffect(() => {
+    router.push("/auth/sigin");
+  }, []);
+
   return (
     <BasicLayout>
       <Head>
