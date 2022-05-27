@@ -70,15 +70,6 @@ export default NextAuth({
     colorScheme: "light",
   },
 
-  // callbacks: {
-  //   jwt: ({ token, account, user, profile, isNewUser }) => {
-  //     console.log({ token, account, user, profile, isNewUser });
-  //     if (account) {
-  //       token.accessToken = account.access_token;
-  //     }
-  //     return token;
-  //   },
-  // },
   pages: {
     signIn: "/auth/signin",
   },
