@@ -79,11 +79,10 @@ const SignIn: NextPage<ISignInProps> = ({ providers, locale }) => {
 
   //** React Effects */
   React.useEffect(() => {
-    console.log({ status, session });
     if (status === "authenticated") {
       router.push("/");
     }
-  }, [status, session]);
+  }, [status]);
   //** */
 
   if (!providers) return <div>{noProvider}</div>;
