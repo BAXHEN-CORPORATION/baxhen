@@ -5,6 +5,7 @@ import {
   getProviders,
   LiteralUnion,
   signIn,
+  useSession,
 } from "next-auth/react";
 import React from "react";
 
@@ -12,7 +13,6 @@ import { AppLocales } from "types";
 
 //** Material */
 import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
 
@@ -23,6 +23,7 @@ import githubIcon from "public/svg/github.svg";
 import linkedinIcon from "public/svg/linkedin.svg";
 import WrappedImage from "components/WrappedImage";
 import IconWrapper from "components/IconWrapper";
+import { useRouter } from "next/router";
 interface ISignInProps {
   providers: Record<
     LiteralUnion<BuiltInProviderType, string>,
@@ -72,11 +73,17 @@ const signInContent = {
 const SignIn: NextPage<ISignInProps> = ({ providers, locale }) => {
   //** State */
   //** Next Hooks */
-
+  const router = useRouter();
   const { noProvider, signInText } = signInContent[locale];
+  const { data: session, status } = useSession();
 
   //** React Effects */
-
+  React.useEffect(() => {
+    console.log({ status, session });
+    if (status === "authenticated") {
+      router.push("/");
+    }
+  }, [status, session]);
   //** */
 
   if (!providers) return <div>{noProvider}</div>;

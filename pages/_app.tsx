@@ -8,6 +8,7 @@ import theme from "styles/theme";
 import createEmotionCache from "styles/create-emotion-cache";
 
 import "../styles/global.css";
+import { SessionProvider } from "next-auth/react";
 
 /**
  * Client-side cache, shared for the whole session of the user in the browser.
@@ -24,7 +25,7 @@ export const ColorModeContext = React.createContext({
 
 function MyApp({
   Component,
-  pageProps,
+  pageProps: { session, ...pageProps },
   emotionCache = clientSideEmotionCache,
 }: MyAppProps) {
   const [mode, setMode] = React.useState<"light" | "dark">("light");
@@ -38,18 +39,23 @@ function MyApp({
     []
   );
   return (
-    <CacheProvider value={emotionCache}>
-      <ColorModeContext.Provider value={colorMode}>
-        <Head>
-          <meta name="viewport" content="initial-scale=1, width=device-width" />
-        </Head>
-        <ThemeProvider theme={theme[mode]}>
-          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-          <CssBaseline />
-          <Component {...pageProps} />
-        </ThemeProvider>
-      </ColorModeContext.Provider>
-    </CacheProvider>
+    <SessionProvider session={session}>
+      <CacheProvider value={emotionCache}>
+        <ColorModeContext.Provider value={colorMode}>
+          <Head>
+            <meta
+              name="viewport"
+              content="initial-scale=1, width=device-width"
+            />
+          </Head>
+          <ThemeProvider theme={theme[mode]}>
+            {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+            <CssBaseline />
+            <Component {...pageProps} />
+          </ThemeProvider>
+        </ColorModeContext.Provider>
+      </CacheProvider>
+    </SessionProvider>
   );
 }
 
