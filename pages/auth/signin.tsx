@@ -11,15 +11,24 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
-import styled from "styled-components";
-import { theme } from "styles/theme";
+
 import { AppLocales } from "types";
 
-import logo from "../../public/images/logo_110.png";
-import googleIcon from "../../public/svg/google.svg";
-import githubIcon from "../../public/svg/github.svg";
-import linkedinIcon from "../../public/svg/linkedin.svg";
+import { styled } from "@mui/material/styles";
 
+//** Material */
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
+import Stack from "@mui/material/Stack";
+
+//** Local */
+import logo from "public/images/logo_110.png";
+import googleIcon from "public/svg/google.svg";
+import githubIcon from "public/svg/github.svg";
+import linkedinIcon from "public/svg/linkedin.svg";
+import WrappedImage from "components/WrappedImage";
+import IconWrapper from "components/IconWrapper";
 interface ISignInProps {
   providers: Record<
     LiteralUnion<BuiltInProviderType, string>,
@@ -29,105 +38,20 @@ interface ISignInProps {
   locale: AppLocales;
 }
 
-const Root = styled.div`
-  height: 100vh;
-  width: 100vw;
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 2rem;
-`;
-const TitleContainer = styled.div`
-  margin-top: 12vh;
-  display: flex;
-  align-items: center;
-  height: min-content;
-  ${theme.device.tablet} {
-    flex-direction: column;
-  }
-`;
-const SignInContainer = styled.div`
-  display: flex;
-  align-items: center;
-  height: min-content;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: auto;
-`;
-const ActionsContainer = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  height: min-content;
-  justify-content: space-evenly;
-`;
-
-const Typography = styled.h1`
-  color: ${({ theme }) => theme.palette.primary};
-  font-size: 128px;
-
-  ${theme.device.tablet} {
-    font-size: 48px;
-  }
-`;
-const Paragraph = styled.p`
-  color: ${({ theme }) => theme.palette.gray};
-  font-size: 36px;
-  text-align: center;
-
-  ${theme.device.tablet} {
-    font-size: 24px;
-  }
-  ${theme.device.mobileM} {
-    font-size: 18px;
-  }
-`;
-
-const Logo = styled(Image)`
-  width: 110px;
-`;
-const Icon = styled.div`
-  position: relative;
-  width: 88px;
-  height: 88px;
-
-  ${theme.device.tablet} {
-    width: 62px;
-    height: 62px;
-  }
-
-  ${theme.device.mobileM} {
-    width: 48px;
-    height: 48px;
-  }
-`;
-
-const IconButton = styled.button`
-  background-color: transparent;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.04);
-  }
-`;
-
 const GoogleIcon = () => (
-  <Icon>
-    <Image layout="fill" src={googleIcon} />
-  </Icon>
+  <IconWrapper>
+    <WrappedImage layout="fill" src={googleIcon} />
+  </IconWrapper>
 );
 const GitHubIcon = () => (
-  <Icon>
-    <Image layout="fill" src={githubIcon} />
-  </Icon>
+  <IconWrapper>
+    <WrappedImage layout="fill" src={githubIcon} />
+  </IconWrapper>
 );
 const LinkedInIcon = () => (
-  <Icon>
-    <Image layout="fill" src={linkedinIcon} />
-  </Icon>
+  <IconWrapper>
+    <WrappedImage layout="fill" src={linkedinIcon} />
+  </IconWrapper>
 );
 
 const iconsConfig = {
@@ -153,8 +77,6 @@ const signInContent = {
 
 const SignIn: NextPage<ISignInProps> = ({ providers, locale }) => {
   //** State */
-
-  // const [locale, setLocale] = React.useState<AppLocales>("en");
   //** Next Hooks */
 
   const { noProvider, signInText } = signInContent[locale];
@@ -166,28 +88,52 @@ const SignIn: NextPage<ISignInProps> = ({ providers, locale }) => {
   if (!providers) return <div>{noProvider}</div>;
 
   return (
-    <Root>
-      {/* <Link href={"/auth/signin"} locale="en">
-        en
-      </Link>
-      <Link href={"/auth/signin"} locale="pt">
-        pt
-      </Link> */}
-      <TitleContainer>
-        <Logo layout="fixed" src={logo} />
-        <Typography>baxhen</Typography>
-      </TitleContainer>
-      <SignInContainer>
-        <Paragraph>{signInText}</Paragraph>
-        <ActionsContainer>
-          {Object.values(providers).map((provider) => (
-            <IconButton key={provider.name} onClick={() => signIn(provider.id)}>
-              {iconsConfig[provider.name as keyof typeof iconsConfig]}
-            </IconButton>
-          ))}
-        </ActionsContainer>
-      </SignInContainer>
-    </Root>
+    <Stack
+      sx={{
+        height: "100vh",
+        width: "100vw",
+        backgroundColor: "white",
+        padding: "2rem",
+      }}
+    >
+      <Stack
+        direction={{ mobile: "column", tablet: "row" }}
+        alignItems="center"
+        justifyContent="center"
+        spacing={{ mobile: 3 }}
+        marginTop="auto"
+      >
+        <WrappedImage width="110px" layout="fixed" src={logo} />
+        <Typography
+          variant="h1"
+          sx={{
+            color: "primary.main",
+            fontSize: { mobile: "48px", tablet: "128px" },
+            fontWeight: 400,
+          }}
+        >
+          baxhen
+        </Typography>
+      </Stack>
+
+      <Stack alignItems="center" marginBottom={8} marginTop="auto">
+        <Typography
+          variant="subtitle1"
+          textAlign="center"
+          color="common.gray"
+          fontSize={{ mobile: "16px", tablet: "32px" }}
+        >
+          {signInText}
+        </Typography>
+      </Stack>
+      <Stack direction="row" justifyContent="space-evenly" marginBottom="auto">
+        {Object.values(providers).map((provider) => (
+          <IconButton key={provider.name} onClick={() => signIn(provider.id)}>
+            {iconsConfig[provider.name as keyof typeof iconsConfig]}
+          </IconButton>
+        ))}
+      </Stack>
+    </Stack>
   );
 };
 
