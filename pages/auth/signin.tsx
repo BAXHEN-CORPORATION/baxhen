@@ -1,20 +1,14 @@
-import { NextPage, NextPageContext } from "next";
+import { NextPage } from "next";
 import { BuiltInProviderType } from "next-auth/providers";
 import {
   ClientSafeProvider,
   getProviders,
   LiteralUnion,
   signIn,
-  signOut,
 } from "next-auth/react";
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/router";
 import React from "react";
 
 import { AppLocales } from "types";
-
-import { styled } from "@mui/material/styles";
 
 //** Material */
 import Typography from "@mui/material/Typography";
