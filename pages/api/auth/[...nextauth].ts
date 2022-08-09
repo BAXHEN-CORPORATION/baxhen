@@ -69,9 +69,10 @@ export default NextAuth({
   theme: {
     colorScheme: "light",
   },
-  session: { maxAge: 1000 },
 
   pages: {
     signIn: "/auth/signin",
   },
 });
+
+//TODO link accounts
