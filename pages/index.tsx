@@ -190,7 +190,7 @@ const Home: NextPage<WithLocaleProp> = ({ locale }) => {
                   color: "primary.main",
                   textAlign: "center",
                   cursor: "pointer",
-                  maxWidth: "max-content",
+                  minWidth: "max-content",
                 }}
               />
             </ListItem>
