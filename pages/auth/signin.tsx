@@ -9,7 +9,7 @@ import {
 } from "next-auth/react";
 import React from "react";
 
-import { AppLocales } from "types";
+import { WithLocaleProp } from "types";
 
 //** Material */
 import Typography from "@mui/material/Typography";
@@ -24,13 +24,11 @@ import linkedinIcon from "public/svg/linkedin.svg";
 import WrappedImage from "components/WrappedImage";
 import IconWrapper from "components/IconWrapper";
 import { useRouter } from "next/router";
-interface ISignInProps {
+interface ISignInProps extends WithLocaleProp {
   providers: Record<
     LiteralUnion<BuiltInProviderType, string>,
     ClientSafeProvider
   > | null;
-
-  locale: AppLocales;
 }
 
 const GoogleIcon = () => (
@@ -109,7 +107,6 @@ const SignIn: NextPage<ISignInProps> = ({ providers, locale }) => {
           sx={{
             color: "primary.main",
             fontSize: { mobile: "48px", tablet: "128px" },
-            fontWeight: 400,
           }}
         >
           baxhen

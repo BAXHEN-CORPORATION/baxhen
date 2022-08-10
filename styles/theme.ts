@@ -37,9 +37,9 @@ let themeOptions: ThemeOptions = {
     // fontSize: 10,
     /*h6: undefined*/
     // fontFamily: "Comfortaa",
-    fontFamily: "EastmanAlternateTrial, sans-serif;",
+    fontFamily: "Work Sans, sans-serif;",
 
-    // h1: { fontFamily: "Comfortaa", fontWeight: 500 },
+    h1: { fontFamily: "Work Sans", fontWeight: 200 },
     // h5: { fontFamily: "MarkProMedium", fontWeight: 300 },
   },
   palette: {
