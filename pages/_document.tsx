@@ -18,7 +18,7 @@ export default class MyDocument extends Document {
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
           />
           <meta name="emotion-insertion-point" content="" />
-          <meta name="description" content="Generated Baxhen Corporation" />
+          <meta name="description" content="Baxhen Corporation" />
           <link rel="icon" href="/favicon.ico" />
           {(this.props as any).emotionStyleTags}
         </Head>
