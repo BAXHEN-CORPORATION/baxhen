@@ -26,7 +26,7 @@ const defaultProps: Partial<NavBarProps> = {};
  *
  * @container
  */
-const NavBar: React.FC<NavBarProps> = ({ locale }) => {
+const NavBar: React.FC<NavBarProps> = ({ locale = "en" }) => {
   //** Global Hooks */
   const router = useRouter();
   //** State */
@@ -34,8 +34,7 @@ const NavBar: React.FC<NavBarProps> = ({ locale }) => {
 
   //** Config Objects */
 
-  const { youtubeMenu, coursesMenu, signOutMenu, homeMenu, muiMenu } =
-    navBarLocales[locale];
+  const { signOutMenu, homeMenu, muiMenu } = navBarLocales[locale];
 
   const menus = [
     {

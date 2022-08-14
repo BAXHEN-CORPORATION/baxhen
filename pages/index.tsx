@@ -30,9 +30,7 @@ const Home: NextPage<LocaleProps> = ({ locale }) => {
         alignItems="center"
         justifyContent="center"
         flexWrap="wrap"
-      >
-        <ContentCard />
-      </Stack>
+      ></Stack>
     </PageLayout>
   );
 };

@@ -26,7 +26,7 @@ const defaultProps: Partial<ContentCardProps> = {};
 const ContentCard: React.FC<ContentCardProps> = ({
   onClick,
   title = "No Title Provided",
-  image = "https://i3.ytimg.com/vi/o1chMISeTC0/maxresdefault.jpg",
+  image = "https://cdn.pixabay.com/photo/2022/03/20/15/40/nature-7081138__340.jpg",
 }) => {
   return (
     <Card
@@ -41,7 +41,7 @@ const ContentCard: React.FC<ContentCardProps> = ({
           component="img"
           sx={{ height: { mobile: "100px", tablet: "250px" } }}
           image={image}
-          alt="green iguana"
+          alt={`card image for ${title}`}
         />
         <CardContent>
           <Typography variant="caption" color="primary" gutterBottom>
