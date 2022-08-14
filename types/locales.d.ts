@@ -1,5 +1,5 @@
 export type AppLocales = "en" | "pt" | "tl";
 
-export interface WithLocaleProp {
+export interface LocaleProps {
   locale: AppLocales;
 }

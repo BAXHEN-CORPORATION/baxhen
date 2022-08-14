@@ -7,12 +7,11 @@ import { useSession } from "next-auth/react";
 import Stack from "@mui/material/Stack";
 
 //** Local Imports */
-
 import { LocaleProps } from "types";
 import PageLayout from "surfaces/PageLayout";
 import ContentCard from "containers/ContentCard";
 
-const Home: NextPage<LocaleProps> = ({ locale }) => {
+const MaterialUI: NextPage<LocaleProps> = ({}) => {
   const router = useRouter();
   const { data: session, status } = useSession();
 
@@ -43,4 +42,4 @@ export async function getServerSideProps({ locale }: any) {
   };
 }
 
-export default Home;
+export default MaterialUI;

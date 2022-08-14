@@ -9,7 +9,7 @@ import {
 } from "next-auth/react";
 import React from "react";
 
-import { WithLocaleProp } from "types";
+import { LocaleProps } from "types";
 
 //** Material */
 import Typography from "@mui/material/Typography";
@@ -24,7 +24,7 @@ import linkedinIcon from "public/svg/linkedin.svg";
 import WrappedImage from "components/WrappedImage";
 import IconWrapper from "components/IconWrapper";
 import { useRouter } from "next/router";
-interface ISignInProps extends WithLocaleProp {
+interface ISignInProps extends LocaleProps {
   providers: Record<
     LiteralUnion<BuiltInProviderType, string>,
     ClientSafeProvider

@@ -9,6 +9,8 @@ import createEmotionCache from "styles/create-emotion-cache";
 
 import "../styles/global.css";
 import { SessionProvider } from "next-auth/react";
+import { LocaleProps } from "types";
+import Layout from "surfaces/Layout/Layout";
 
 /**
  * Client-side cache, shared for the whole session of the user in the browser.
@@ -51,7 +53,9 @@ function MyApp({
           <ThemeProvider theme={theme[mode]}>
             {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
             <CssBaseline />
-            <Component {...pageProps} />
+            <Layout locale={pageProps.locale}>
+              <Component {...pageProps} />
+            </Layout>
           </ThemeProvider>
         </ColorModeContext.Provider>
       </CacheProvider>
