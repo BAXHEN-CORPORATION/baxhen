@@ -45,7 +45,8 @@ const MaterialUI: NextPage<MaterialUIProps> = ({ content }) => {
 
 export async function getServerSideProps({ locale }: any) {
   const response = await client.get<ContentResponse[]>(
-    "/api/content/material-ui-v5"
+    "/api/content/material-ui-v5",
+    { headers: { locale } }
   );
 
   const content = response.data;
