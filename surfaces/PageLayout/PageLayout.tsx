@@ -25,6 +25,7 @@ const PageLayout: React.FC<PageLayoutProps> = ({ children }) => {
       width="100vw"
       padding="4rem"
       alignItems="center"
+      paddingTop={{ tablet: "120px", mobile: "100px" }}
     >
       {children}
     </Stack>

@@ -12,7 +12,6 @@ export default async function handler(
     .collection("codebase")
     .find({}, { projection: { src: 0 } })
     .forEach((item) => {
-      // console.log({ item })
       codebase.push(item);
     });
 

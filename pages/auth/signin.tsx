@@ -33,17 +33,17 @@ interface ISignInProps extends LocaleProps {
 
 const GoogleIcon = () => (
   <IconWrapper>
-    <WrappedImage layout="fill" src={googleIcon} />
+    {/* <WrappedImage layout="fill" src={googleIcon} /> */}
   </IconWrapper>
 );
 const GitHubIcon = () => (
   <IconWrapper>
-    <WrappedImage layout="fill" src={githubIcon} />
+    {/* <WrappedImage layout="fill" src={githubIcon} /> */}
   </IconWrapper>
 );
 const LinkedInIcon = () => (
   <IconWrapper>
-    <WrappedImage layout="fill" src={linkedinIcon} />
+    {/* <WrappedImage layout="fill" src={linkedinIcon} /> */}
   </IconWrapper>
 );
 
@@ -101,7 +101,7 @@ const SignIn: NextPage<ISignInProps> = ({ providers, locale }) => {
         spacing={{ mobile: 3 }}
         marginTop="auto"
       >
-        <WrappedImage width="110px" layout="fixed" src={logo} />
+        {/* <WrappedImage width="110px" layout="fixed" src={logo} /> */}
         <Typography
           variant="h1"
           sx={{

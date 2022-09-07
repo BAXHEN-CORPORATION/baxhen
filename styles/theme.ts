@@ -37,9 +37,9 @@ let themeOptions: ThemeOptions = {
     // fontSize: 10,
     /*h6: undefined*/
     // fontFamily: "Comfortaa",
-    fontFamily: "Work Sans, sans-serif;",
+    fontFamily: "Ubuntu, sans-serif;",
 
-    h1: { fontFamily: "Work Sans", fontWeight: 200 },
+    h1: { fontFamily: "Ubuntu", fontWeight: 200 },
     // h5: { fontFamily: "MarkProMedium", fontWeight: 300 },
   },
   palette: {
@@ -64,7 +64,9 @@ const theme = createTheme(themeOptions);
 //* Other configs
 
 themeOptions = merge<ThemeOptions, ThemeOptions>(themeOptions, {
-  components: {},
+  components: {
+    MuiSvgIcon: { styleOverrides: { fontSizeLarge: "25px" } },
+  },
 });
 
 //** Dark Theme */
