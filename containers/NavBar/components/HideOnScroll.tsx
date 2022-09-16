@@ -1,6 +1,6 @@
 //** External Imports */
 import Slide from "@mui/material/Slide";
-import useScrollTrigger from "@mui/material/useScrollTrigger";
+import { useScrollTrigger } from "hooks/custom";
 import React from "react";
 
 //** Local Imports */
@@ -20,9 +20,8 @@ const defaultProps: Partial<HideOnScrollProps> = {};
  */
 const HideOnScroll: React.FC<HideOnScrollProps> = (props) => {
   const { children } = props;
-  const trigger = useScrollTrigger({
-    target: window,
-  });
+
+  const trigger = useScrollTrigger();
 
   return (
     <Slide appear={false} direction="down" in={!trigger}>

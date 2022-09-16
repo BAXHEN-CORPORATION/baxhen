@@ -4,9 +4,12 @@ import React from "react";
 import Stack from "@mui/material/Stack";
 //** Local Imports */
 import { ChildrenProps } from "types";
+import { SxProps, Theme } from "@mui/material";
 
 //** Typings */
-export interface PageLayoutProps extends ChildrenProps {}
+export interface PageLayoutProps extends ChildrenProps {
+  sx?: SxProps<Theme>;
+}
 
 //** Default Props */
 const defaultProps: Partial<PageLayoutProps> = {};
@@ -16,16 +19,15 @@ const defaultProps: Partial<PageLayoutProps> = {};
  *
  * @surface
  */
-const PageLayout: React.FC<PageLayoutProps> = ({ children }) => {
+const PageLayout: React.FC<PageLayoutProps> = ({ children, sx }) => {
   return (
     <Stack
       component="main"
       spacing={2}
       minHeight="80vh"
-      width="100vw"
-      padding="4rem"
       alignItems="center"
       paddingTop={{ tablet: "120px", mobile: "100px" }}
+      sx={{ bgcolor: "secondary.main", ...sx }}
     >
       {children}
     </Stack>

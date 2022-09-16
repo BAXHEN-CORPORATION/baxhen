@@ -44,7 +44,7 @@ const defaultProps: Partial<NavBarProps> = {};
  * @container
  */
 const NavBar: React.FC<NavBarProps> = ({ locale = "en" }) => {
-  const { toggleOpen, open } = useNavBar();
+  const { toggleOpen, open, isOnPageTop } = useNavBar();
 
   //** Global Hooks */
   const router = useRouter();
@@ -79,19 +79,26 @@ const NavBar: React.FC<NavBarProps> = ({ locale = "en" }) => {
   return (
     <>
       <HideOnScroll>
-        <AppBar color="secondary">
-          <Toolbar sx={{ height: { tablet: "120px", mobile: "100px" } }}>
+        <AppBar color="secondary" elevation={isOnPageTop ? 0 : 2}>
+          <Toolbar
+            sx={{
+              height: { tablet: "120px", mobile: "100px" },
+              width: "100vw",
+            }}
+          >
             <NavBarLogo />
             <Stack
               direction="row"
               ml="auto"
-              display={{ tablet: "unset", mobile: "none" }}
+              mr="auto"
+              gap="2rem"
+              display={{ tablet: "flex", mobile: "none" }}
             >
               {menus.map(({ label, onClick }) => (
                 <Button
                   disableTouchRipple
                   sx={{
-                    fontSize: "20px",
+                    fontSize: "18px",
                     fontWeight: 400,
                     fontFamily: "Ubuntu",
                     color: "black",
@@ -113,7 +120,10 @@ const NavBar: React.FC<NavBarProps> = ({ locale = "en" }) => {
               edge="start"
               color="primary"
               aria-label="open drawer"
-              sx={{ ml: "auto", display: { tablet: "none", mobile: "unset" } }}
+              sx={{
+                ml: "auto",
+                display: { tablet: "none", mobile: "unset" },
+              }}
               onClick={toggleOpen}
             >
               <MenuIcon fontSize="large" />
@@ -121,7 +131,11 @@ const NavBar: React.FC<NavBarProps> = ({ locale = "en" }) => {
           </Toolbar>
         </AppBar>
       </HideOnScroll>
-      <Drawer anchor="right" open={open}>
+      <Drawer
+        anchor="right"
+        open={open}
+        sx={{ display: open ? "unset" : "none" }}
+      >
         <DrawerHeader width={{ tabletSmall: "400px", mobile: "100vw" }}>
           <NavBarLogo />
           <IconButton onClick={toggleOpen}>

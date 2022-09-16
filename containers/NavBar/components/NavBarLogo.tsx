@@ -26,10 +26,11 @@ const NavBarLogo: React.FC<NavBarLogoProps> = () => {
       alignItems="center"
       paddingLeft={(theme) => theme.spacing(1)}
       sx={{ cursor: "pointer" }}
+      ml={{ tablet: "6rem", mobile: "1rem" }}
     >
       <WrappedImage
-        height={{ tablet: "3rem", mobile: "2rem" }}
-        width={{ tablet: "3rem", mobile: "2rem" }}
+        height={{ tablet: "2rem", mobile: "2rem" }}
+        width={{ tablet: "2rem", mobile: "2rem" }}
         src={logo}
       />
 
@@ -37,7 +38,7 @@ const NavBarLogo: React.FC<NavBarLogoProps> = () => {
         variant="h1"
         sx={{
           color: "black",
-          fontSize: { mobile: "48px", tablet: "64px" },
+          fontSize: { mobile: "28px", tablet: "36px" },
         }}
       >
         baxhen

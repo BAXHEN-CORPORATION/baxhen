@@ -24,28 +24,23 @@ const Home: NextPage<LocaleProps> = ({ locale }) => {
   // }, [status]);
 
   return (
-    <PageLayout>
+    <PageLayout sx={{ padding: "0 2rem" }}>
       <Stack
         gap="2rem"
         direction={{ mobile: "column", tabletSmall: "row" }}
         alignItems="center"
         justifyContent="center"
         flexWrap="wrap"
+        width="100%"
       >
-        <Box height="100vh" width="100vw">
-          3423423
+        <Box height="100vh" width="inherit">
+          Developing
         </Box>
-        <Box height="100vh" width="100vw">
-          3423423
+        <Box height="100vh" width="inherit">
+          Developing
         </Box>
-        <Box height="100vh" width="100vw">
-          3423423
-        </Box>
-        <Box height="100vh" width="100vw">
-          3423423
-        </Box>
-        <Box height="100vh" width="100vw">
-          3423423
+        <Box height="100vh" width="inherit">
+          Developing
         </Box>
       </Stack>
     </PageLayout>

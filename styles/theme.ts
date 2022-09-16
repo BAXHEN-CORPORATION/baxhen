@@ -56,7 +56,13 @@ let themeOptions: ThemeOptions = {
     },
   },
 
-  components: {},
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {},
+      },
+    },
+  },
 };
 
 const theme = createTheme(themeOptions);
