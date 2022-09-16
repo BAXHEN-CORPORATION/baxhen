@@ -5,7 +5,7 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
 //** Local Imports */
-import WrappedImage from "components/WrappedImage";
+import WrappedImage from "src/components/WrappedImage";
 import logo from "public/images/logo_110.png";
 
 //** Typings */

@@ -10,7 +10,6 @@ import Stack from "@mui/material/Stack";
 
 import { LocaleProps } from "types";
 import PageLayout from "surfaces/PageLayout";
-import ContentCard from "containers/ContentCard";
 import Box from "@mui/material/Box";
 
 const Home: NextPage<LocaleProps> = ({ locale }) => {

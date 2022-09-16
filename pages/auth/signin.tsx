@@ -21,8 +21,8 @@ import logo from "public/images/logo_110.png";
 import googleIcon from "public/svg/google.svg";
 import githubIcon from "public/svg/github.svg";
 import linkedinIcon from "public/svg/linkedin.svg";
-import WrappedImage from "components/WrappedImage";
-import IconWrapper from "components/IconWrapper";
+import WrappedImage from "src/components/WrappedImage";
+import IconWrapper from "src/components/IconWrapper";
 import { useRouter } from "next/router";
 interface ISignInProps extends LocaleProps {
   providers: Record<

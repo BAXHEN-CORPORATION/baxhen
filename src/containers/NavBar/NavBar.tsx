@@ -16,11 +16,11 @@ import CloseIcon from "@mui/icons-material/Close";
 
 //** Local Imports */
 import { LocaleProps } from "types";
-import { navBarLocales } from "locales";
-import IconButtonMenu from "components/IconButtonMenu";
+import { navBarLocales } from "src/locales";
+import IconButtonMenu from "src/components/IconButtonMenu";
 import IconButton from "@mui/material/IconButton";
 import { useNavBar } from "./meta";
-import WrappedImage from "components/WrappedImage";
+import WrappedImage from "src/components/WrappedImage";
 
 import Drawer from "@mui/material/Drawer";
 import { DrawerHeader } from "./components";
