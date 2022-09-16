@@ -1,11 +1,8 @@
 //** External Imports */
 import React from "react";
-import { signOut } from "next-auth/react";
 import { useRouter } from "next/router";
 
 import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
@@ -16,11 +13,9 @@ import CloseIcon from "@mui/icons-material/Close";
 
 //** Local Imports */
 import { LocaleProps } from "types";
-import { navBarLocales } from "src/locales";
-import IconButtonMenu from "src/components/IconButtonMenu";
+import { navBarLocales } from "locales";
 import IconButton from "@mui/material/IconButton";
 import { useNavBar } from "./meta";
-import WrappedImage from "src/components/WrappedImage";
 
 import Drawer from "@mui/material/Drawer";
 import { DrawerHeader } from "./components";
@@ -28,8 +23,6 @@ import NavBarLogo from "./components/NavBarLogo";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import Button from "@mui/material/Button";
-import useScrollTrigger from "@mui/material/useScrollTrigger";
-import Slide from "@mui/material/Slide";
 import HideOnScroll from "./components/HideOnScroll";
 
 //** Typings */

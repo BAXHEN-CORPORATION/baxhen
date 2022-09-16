@@ -1,4 +1,4 @@
-import { useListenScroll } from "src/hooks/custom";
+import { useListenScroll } from "hooks/custom";
 import React from "react";
 
 export const useNavBar = () => {

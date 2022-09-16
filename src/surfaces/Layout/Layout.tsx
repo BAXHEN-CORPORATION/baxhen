@@ -3,7 +3,7 @@ import React from "react";
 
 import Box from "@mui/material/Box";
 import { ChildrenProps, LocaleProps } from "types";
-import NavBar from "src/containers/NavBar";
+import NavBar from "containers/NavBar";
 import Head from "next/head";
 import { useRouter } from "next/router";
 

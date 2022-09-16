@@ -1,6 +1,6 @@
 //** External Imports */
 import Slide from "@mui/material/Slide";
-import { useScrollTrigger } from "src/hooks/custom";
+import { useScrollTrigger } from "hooks/custom";
 import React from "react";
 
 //** Local Imports */

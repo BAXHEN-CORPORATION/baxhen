@@ -5,8 +5,8 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
 //** Local Imports */
-import WrappedImage from "src/components/WrappedImage";
-import logo from "public/images/logo_110.png";
+import WrappedImage from "components/WrappedImage";
+import logo from "assets/images/logo_110.png";
 
 //** Typings */
 export interface NavBarLogoProps {}

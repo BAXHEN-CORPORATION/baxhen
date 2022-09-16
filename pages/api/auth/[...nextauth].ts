@@ -11,7 +11,7 @@ import {
   GOOGLE_SECRET,
   LINKEDIN_CLIENT_ID,
   LINKEDIN_CLIENT_SECRET,
-} from "../../../utils";
+} from "utils";
 import axios from "axios";
 
 export default NextAuth({

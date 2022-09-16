@@ -7,7 +7,7 @@ import { CacheProvider, EmotionCache } from "@emotion/react";
 import theme from "styles/theme";
 import createEmotionCache from "styles/create-emotion-cache";
 
-import "../styles/global.css";
+import "styles/global.css";
 import { SessionProvider } from "next-auth/react";
 import { LocaleProps } from "types";
 import Layout from "surfaces/Layout/Layout";

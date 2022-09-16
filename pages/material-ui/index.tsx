@@ -9,8 +9,8 @@ import Stack from "@mui/material/Stack";
 //** Local Imports */
 import { ContentResponse, LocaleProps } from "types";
 import PageLayout from "surfaces/PageLayout";
-import ContentCard from "src/containers/ContentCard";
-import { client } from "src/api";
+import ContentCard from "containers/ContentCard";
+import { client } from "api";
 
 interface MaterialUIProps extends LocaleProps {
   content: ContentResponse[];

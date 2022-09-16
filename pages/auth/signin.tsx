@@ -17,12 +17,7 @@ import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
 
 //** Local */
-import logo from "public/images/logo_110.png";
-import googleIcon from "public/svg/google.svg";
-import githubIcon from "public/svg/github.svg";
-import linkedinIcon from "public/svg/linkedin.svg";
-import WrappedImage from "src/components/WrappedImage";
-import IconWrapper from "src/components/IconWrapper";
+import IconWrapper from "components/IconWrapper";
 import { useRouter } from "next/router";
 interface ISignInProps extends LocaleProps {
   providers: Record<
