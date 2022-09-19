@@ -20,12 +20,6 @@ const MaterialUI: NextPage<MaterialUIProps> = ({ content }) => {
   const router = useRouter();
   const { data: session, status } = useSession();
 
-  React.useEffect(() => {
-    if (status === "unauthenticated") {
-      router.push("/auth/signin");
-    }
-  }, [status]);
-
   return (
     <PageLayout>
       <Stack
