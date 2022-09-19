@@ -70,7 +70,7 @@ const Home: NextPage<LocaleProps> = ({ locale }) => {
   );
 };
 
-export async function getServerSideProps({ locale }: any) {
+export async function getStaticProps({ locale }: any) {
   return {
     props: { locale },
   };
