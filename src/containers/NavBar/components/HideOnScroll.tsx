@@ -24,7 +24,12 @@ const HideOnScroll: React.FC<HideOnScrollProps> = (props) => {
   const trigger = useScrollTrigger();
 
   return (
-    <Slide appear={false} direction="down" in={!trigger}>
+    <Slide
+      appear={false}
+      timeout={{ enter: 500, exit: 200 }}
+      direction="down"
+      in={!trigger}
+    >
       {children}
     </Slide>
   );

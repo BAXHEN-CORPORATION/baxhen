@@ -26,7 +26,10 @@ const PageLayout: React.FC<PageLayoutProps> = ({ children, sx }) => {
       spacing={2}
       minHeight="100vh"
       alignItems="center"
-      paddingTop={{ tablet: "120px", mobile: "100px" }}
+      paddingTop={(theme) => ({
+        tablet: theme.navbar.tablet,
+        mobile: theme.navbar.mobile,
+      })}
       sx={{ bgcolor: "secondary.main", ...sx }}
     >
       {children}

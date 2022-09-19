@@ -17,13 +17,15 @@ declare module "@mui/material" {
   //** Theme */
 
   interface Theme {
-    status?: {
-      danger?: React.CSSProperties["color"];
+    navbar: {
+      tablet: React.CSSProperties["height"];
+      mobile: React.CSSProperties["height"];
     };
   }
   interface ThemeOptions {
-    status?: {
-      danger?: React.CSSProperties["color"];
+    navbar?: {
+      tablet?: React.CSSProperties["height"];
+      mobile?: React.CSSProperties["height"];
     };
   }
 

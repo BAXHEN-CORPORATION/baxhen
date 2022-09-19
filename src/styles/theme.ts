@@ -33,6 +33,10 @@ const palette = {
 };
 
 let themeOptions: ThemeOptions = {
+  navbar: {
+    tablet: "120px",
+    mobile: "100px",
+  },
   typography: {
     // fontSize: 10,
     /*h6: undefined*/
@@ -65,7 +69,7 @@ let themeOptions: ThemeOptions = {
   },
 };
 
-const theme = createTheme(themeOptions);
+const theme = createTheme(themeOptions, {});
 
 //* Other configs
 
