@@ -45,6 +45,7 @@ const NavBar: React.FC<NavBarProps> = ({ locale = "en" }) => {
 
   //** Config Objects */
 
+  console.log({ locale });
   const { signOutMenu, homeMenu, muiMenu } = navBarLocales[locale];
 
   const menus = [

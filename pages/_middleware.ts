@@ -15,6 +15,7 @@ export function middleware(request: NextRequest) {
       request.nextUrl.locale === "default";
 
     if (shouldHandleLocale) {
+      console.log({ shouldHandleLocale, locale });
       const url = request.nextUrl.clone();
 
       url.locale = locale;
