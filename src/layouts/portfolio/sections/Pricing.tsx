@@ -127,13 +127,13 @@ function Pricing() {
                     { label: "Experiências", includes: true },
                     { label: "Habilidades", includes: true },
                     { label: "Melhores projetos", includes: true },
+                    { label: "Download currículo", includes: true },
                     { label: "Links sociais", includes: true },
                     { label: "Suporte em vídeo", includes: true },
-                    { label: "Download currículo", includes: true },
                     { label: "Página de projetos", includes: true },
                     { label: "Página para cada projeto", includes: true },
-                    { label: "Suporte por email", includes: true },
                     { label: "Compartilhar projetos", includes: true },
+                    { label: "Suporte por email", includes: true },
                   ]}
                   action={{
                     type: "internal",
