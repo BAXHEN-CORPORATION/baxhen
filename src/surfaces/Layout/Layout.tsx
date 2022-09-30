@@ -3,7 +3,7 @@ import React from "react";
 
 import Box from "@mui/material/Box";
 import { ChildrenProps, LocaleProps } from "types";
-import NavBar from "containers/NavBar";
+// import NavBar from "containers/NavBar";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
@@ -39,7 +39,7 @@ const Layout: React.FC<LayoutProps> = ({
         <meta name="viewport" content="initial-scale=1, width=device-width" />
         <title>baxhen</title>
       </Head>
-      {!isHideLayout && <NavBar locale={locale} />}
+      {/* {!isHideLayout && <NavBar locale={locale} />} */}
 
       <Box component="main">{children}</Box>
     </>

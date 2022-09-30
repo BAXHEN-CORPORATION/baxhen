@@ -1,62 +1,66 @@
 import "@mui/material";
 
+import boxShadows from "styles/theme/base/boxShadows";
+import borders from "styles/theme/base/borders";
+import functions from "styles/theme/functions";
+
 declare module "@mui/material" {
   //** Palette */
 
   interface Palette {
-    neutral?: Palette["primary"];
+    text?: Palette["primary"];
+    transparent?: Palette["primary"];
+    white?: Palette["primary"];
+    black?: Palette["primary"];
   }
   interface PaletteOptions {
-    neutral?: PaletteOptions["primary"];
+    text?: PaletteOptions["primary"];
+    transparent?: PaletteOptions["primary"];
+    white?: PaletteOptions["primary"];
+    black?: PaletteOptions["primary"];
   }
 
   interface CommonColors {
-    gray: string;
+    // gray: string;
   }
 
   //** Theme */
 
   interface Theme {
-    navbar: {
-      tablet: React.CSSProperties["height"];
-      mobile: React.CSSProperties["height"];
-    };
+    boxShadows: typeof boxShadows;
+    borders: typeof borders;
+    functions: typeof functions;
   }
   interface ThemeOptions {
-    navbar?: {
-      tablet?: React.CSSProperties["height"];
-      mobile?: React.CSSProperties["height"];
-    };
+    boxShadows: typeof boxShadows;
+    borders: typeof borders;
+    functions: typeof functions;
   }
 
   //* Typography */
 
   interface TypographyVariants {
-    poster: React.CSSProperties;
+    // poster: React.CSSProperties;
   }
 
   // allow configuration using `createTheme`
   interface TypographyVariantsOptions {
-    poster?: React.CSSProperties;
+    // poster?: React.CSSProperties;
   }
 
   interface TypographyPropsVariantOverrides {
-    poster: true;
+    // poster: true;
     // h6: false;
   }
 
   //** Breakpoints */
 
   interface BreakpointOverrides {
-    xs: false; // removes the `xs` breakpoint
-    sm: false;
-    md: false;
-    lg: false;
-    xl: false;
-    mobile: true; // adds the `mobile` breakpoint
-    tabletSmall: true;
-    tablet: true;
-    laptop: true;
-    desktop: true;
+    xs: true;
+    sm: true;
+    md: true;
+    lg: true;
+    xl: true;
+    xxl: true;
   }
 }
