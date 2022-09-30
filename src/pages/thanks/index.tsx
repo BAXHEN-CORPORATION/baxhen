@@ -31,19 +31,15 @@ import MKTypography from "components/MKTypography";
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 
 // Pricing page sections
-import AboutUs from "layouts/portfolio/sections/AboutUs";
-import CtaOne from "layouts/portfolio/sections/CtaOne";
-import PricingSection from "layouts/portfolio/sections/Pricing";
-import Testimonials from "layouts/portfolio/sections/Testimonials";
 
-import bgImage from "assets/images/desktop_01.png";
-import Link from "next/link";
+import bgImage from "assets/images/thank-you.jpg";
+import Faq from "layouts/portfolio/sections/Faq";
 
 // Routes
 // import routes from "routes";
 // import footerRoutes from "footer.routes";
 
-function Pricing() {
+function Thanks() {
   return (
     <>
       <DefaultNavbar
@@ -93,7 +89,7 @@ function Pricing() {
                 },
               })}
             >
-              Um portifólio feito para você
+              Obrigado por adquirir o template de portifólio!
             </MKTypography>
             <MKTypography
               variant="body1"
@@ -102,24 +98,20 @@ function Pricing() {
               pr={{ md: 12, lg: 24, xl: 32 }}
               opacity={0.8}
             >
-              Mostre o seu melhor para o mundo, suas experiências, projetos e
-              conquistas.
+              Agora é o seu momento de mostrar as suas habilidades. Fique
+              ligado(a) no nosso canal no youtube em breve teremos vídeos
+              tutoriais de como tirar o máximo de seu portifólio.
             </MKTypography>
             <Stack direction="row" spacing={1} mt={6} mb={3}>
               <MKButton
                 component={MuiLink}
                 target="__blank"
-                href="https://sowl.co/W5Qou"
+                href="https://www.youtube.com/channel/UCjvEJTu4sFNw6MUaw28XBtg"
                 variant="gradient"
                 color="warning"
               >
-                comprar
+                Youtube
               </MKButton>
-              <Link href="/portfolio#cta" passHref>
-                <MKButton component={MuiLink} variant="text" color="text">
-                  quero testar sem compromisso
-                </MKButton>
-              </Link>
             </Stack>
           </Grid>
         </Container>
@@ -136,19 +128,10 @@ function Pricing() {
           boxShadow: ({ boxShadows: { xxl } }) => xxl,
         }}
       >
-        <AboutUs />
-
-        <Testimonials />
-
-        <PricingSection />
-
-        <CtaOne />
+        <Faq />
       </Card>
-      <MKBox pt={6} px={1} mt={6}>
-        {/* <DefaultFooter content={footerRoutes} /> */}
-      </MKBox>
     </>
   );
 }
 
-export default Pricing;
+export default Thanks;
