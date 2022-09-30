@@ -38,6 +38,7 @@ import Testimonials from "layouts/portfolio/sections/Testimonials";
 
 import bgImage from "assets/images/desktop_01.png";
 import Link from "next/link";
+import Faq from "../../layouts/portfolio/sections/Faq";
 
 // Routes
 // import routes from "routes";
@@ -143,6 +144,8 @@ function Pricing() {
         <PricingSection />
 
         <CtaOne />
+
+        <Faq />
       </Card>
       <MKBox pt={6} px={1} mt={6}>
         {/* <DefaultFooter content={footerRoutes} /> */}
