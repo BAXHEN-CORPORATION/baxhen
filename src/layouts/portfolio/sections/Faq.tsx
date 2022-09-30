@@ -52,7 +52,7 @@ function Faq() {
                   Perguntas Frequentes
                 </MKTypography>
                 <MKTypography variant="body2" color="white" opacity={0.8}>
-                  Last modified: Sept 30 2022
+                  Última modificação: Set 30 2022
                 </MKTypography>
               </MKBox>
               <MKBox py={2} px={3}>
