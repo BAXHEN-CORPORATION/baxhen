@@ -119,7 +119,7 @@ function Pricing() {
                   badge={{ color: "warning", label: "profissional" }}
                   price={{
                     currency: "R$",
-                    value: 47,
+                    value: 97,
                     type: ",00",
                   }}
                   specifications={[
