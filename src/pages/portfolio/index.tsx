@@ -51,7 +51,7 @@ function Pricing() {
         routes={[]}
         action={{
           type: "external",
-          route: "https://www.creative-tim.com/product/material-kit-pro-react",
+          route: "https://sowl.co/W5Qou",
           label: "comprar",
           color: "warning",
         }}
@@ -109,7 +109,7 @@ function Pricing() {
               <MKButton
                 component={MuiLink}
                 target="__black"
-                href="https://www.creative-tim.com/product/material-kit-pro-react"
+                href="https://sowl.co/W5Qou"
                 variant="gradient"
                 color="warning"
               >

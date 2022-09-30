@@ -97,13 +97,13 @@ function Pricing() {
                     { label: "Experiências", includes: true },
                     { label: "Habilidades", includes: true },
                     { label: "Melhores projetos", includes: true },
+                    { label: "Download currículo", includes: false },
                     { label: "Links sociais", includes: true },
                     { label: "Suporte em vídeo", includes: true },
-                    { label: "Download currículo", includes: false },
                     { label: "Página de projetos", includes: false },
                     { label: "Página para cada projeto", includes: false },
-                    { label: "Suporte por email", includes: false },
                     { label: "Compartilhar projetos", includes: false },
+                    { label: "Suporte por email", includes: false },
                   ]}
                   action={{
                     type: "internal",
@@ -136,8 +136,8 @@ function Pricing() {
                     { label: "Suporte por email", includes: true },
                   ]}
                   action={{
-                    type: "internal",
-                    route: "/",
+                    type: "external",
+                    route: "https://sowl.co/W5Qou",
                     color: "warning",
                     label: "quero o melhor",
                   }}
