@@ -17,11 +17,11 @@ import Typography from "@mui/material/Typography";
 import { homeLocales } from "locales";
 
 const Home: NextPage<LocaleProps> = ({ locale }) => {
-  const { heading, subtitle } = homeLocales[locale];
+  // const { heading, subtitle } = homeLocales[locale];
 
   return (
     <PageLayout sx={{ padding: "0 2rem" }}>
-      <Stack
+      {/* <Stack
         gap="2rem"
         direction={{ mobile: "column", tabletSmall: "row" }}
         alignItems="center"
@@ -42,17 +42,15 @@ const Home: NextPage<LocaleProps> = ({ locale }) => {
             <Typography variant="subtitle1">{subtitle}</Typography>
           </Stack>
         </Stack>
-      </Stack>
-
-      {/* <Stack height={}></Stack> */}
+      </Stack> */}
     </PageLayout>
   );
 };
 
-export async function getServerSideProps({ locale }: any) {
-  return {
-    props: { locale },
-  };
-}
+// export async function getServerSideProps({ locale }: any) {
+//   return {
+//     props: { locale },
+//   };
+// }
 
 export default Home;

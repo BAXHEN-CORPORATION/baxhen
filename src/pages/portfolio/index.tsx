@@ -47,7 +47,7 @@ import Faq from "../../layouts/portfolio/sections/Faq";
 function Pricing() {
   return (
     <>
-      <DefaultNavbar
+      {/* <DefaultNavbar
         brand="baxhen"
         routes={[]}
         action={{
@@ -57,7 +57,7 @@ function Pricing() {
           color: "warning",
         }}
         sticky
-      />
+      /> */}
       <MKBox
         minHeight="75vh"
         width="100%"
@@ -117,7 +117,7 @@ function Pricing() {
                 comprar
               </MKButton>
               <Link href="/portfolio#cta" passHref>
-                <MKButton component={MuiLink} variant="text" color="text">
+                <MKButton component={MuiLink} variant="text" color="info">
                   quero testar sem compromisso
                 </MKButton>
               </Link>
@@ -147,9 +147,6 @@ function Pricing() {
 
         <Faq />
       </Card>
-      <MKBox pt={6} px={1} mt={6}>
-        {/* <DefaultFooter content={footerRoutes} /> */}
-      </MKBox>
     </>
   );
 }

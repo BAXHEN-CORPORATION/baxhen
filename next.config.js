@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // reactStrictMode: true,
+  reactStrictMode: false,
+
   i18n: {
     locales: ["en", "pt", "tl" /*"es", "cn"*/],
     defaultLocale: "en",
@@ -13,4 +14,19 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+const withTM = require("next-transpile-modules")([
+  "@mui/material",
+  "@mui/system",
+]);
+
+module.exports = withTM({
+  ...nextConfig,
+  webpack: (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      "@mui/styled-engine": "@mui/styled-engine-sc",
+    };
+
+    return config;
+  },
+});

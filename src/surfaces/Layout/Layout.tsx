@@ -29,21 +29,13 @@ const Layout: React.FC<LayoutProps> = ({
   locale,
   hideLayoutPaths,
 }) => {
-  const router = useRouter();
+  // const router = useRouter();
 
-  const isHideLayout = hideLayoutPaths?.includes(router.asPath);
+  console.log({ locale });
 
-  return (
-    <>
-      <Head>
-        <meta name="viewport" content="initial-scale=1, width=device-width" />
-        <title>baxhen</title>
-      </Head>
-      {/* {!isHideLayout && <NavBar locale={locale} />} */}
+  // const isHideLayout = hideLayoutPaths?.includes(router.asPath);
 
-      <Box component="main">{children}</Box>
-    </>
-  );
+  return <>{children}</>;
 };
 
 Layout.defaultProps = defaultProps;

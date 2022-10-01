@@ -99,7 +99,7 @@ function Testimonials() {
               title="Rapido e com muita qualidade"
               review="Consegui me posicionar de forma bem mais acertiva e me diferenciava dos concorrentes sempre que participava de entrevistas."
               author={{
-                logo: logoSpotify,
+                logo: logoSpotify.src,
                 name: "Mateus Pereira",
                 role: "Programador Web",
               }}
@@ -113,7 +113,7 @@ function Testimonials() {
               title="Designer Web"
               review="Foi incrível como a minha imagem profissional se fortaleceu, graças a isso cobro mais dos meus clientes."
               author={{
-                logo: logoSlack,
+                logo: logoSlack.src,
                 name: "Angelina Moura",
                 role: "Designer Freelancer",
               }}

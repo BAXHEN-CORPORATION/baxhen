@@ -1,10 +1,7 @@
 import * as React from "react";
 import Document, { Html, Head, Main, NextScript } from "next/document";
-import createEmotionServer from "@emotion/server/create-instance";
 
-import createEmotionCache from "styles/create-emotion-cache";
-import theme from "styles/theme";
-
+import { ServerStyleSheet } from "styled-components";
 export default class MyDocument extends Document {
   render() {
     return (
@@ -21,10 +18,9 @@ export default class MyDocument extends Document {
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
           />
-          <meta name="emotion-insertion-point" content="" />
+
           <meta name="description" content="Baxhen Corporation" />
           <link rel="icon" href="/favicon.ico" />
-          {(this.props as any).emotionStyleTags}
         </Head>
         <body>
           <Main />
@@ -62,34 +58,29 @@ MyDocument.getInitialProps = async (ctx) => {
 
   const originalRenderPage = ctx.renderPage;
 
-  // You can consider sharing the same Emotion cache between all the SSR requests to speed up performance.
-  // However, be aware that it can have global side effects.
-  const cache = createEmotionCache();
-  const { extractCriticalToChunks } = createEmotionServer(cache);
+  const sheet = new ServerStyleSheet();
 
-  ctx.renderPage = () =>
-    originalRenderPage({
-      enhanceApp: (App: any) =>
-        function EnhanceApp(props) {
-          return <App emotionCache={cache} {...props} />;
-        },
-    });
+  try {
+    ctx.renderPage = () =>
+      originalRenderPage({
+        enhanceApp: (App: any) => (props) =>
+          sheet.collectStyles(<App {...props} />),
+      });
 
-  const initialProps = await Document.getInitialProps(ctx);
-  // This is important. It prevents Emotion to render invalid HTML.
-  // See https://github.com/mui/material-ui/issues/26561#issuecomment-855286153
-  const emotionStyles = extractCriticalToChunks(initialProps.html);
-  const emotionStyleTags = emotionStyles.styles.map((style: any) => (
-    <style
-      data-emotion={`${style.key} ${style.ids.join(" ")}`}
-      key={style.key}
-      // eslint-disable-next-line react/no-danger
-      dangerouslySetInnerHTML={{ __html: style.css }}
-    />
-  ));
+    const initialProps = await Document.getInitialProps(ctx);
 
-  return {
-    ...initialProps,
-    emotionStyleTags,
-  };
+    const styles = [
+      <React.Fragment>
+        {initialProps.styles}
+        {sheet.getStyleElement()}
+      </React.Fragment>,
+    ];
+
+    return {
+      ...initialProps,
+      styles,
+    };
+  } finally {
+    sheet.seal();
+  }
 };

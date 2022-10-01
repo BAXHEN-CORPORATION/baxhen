@@ -4,7 +4,7 @@ import React from "react";
 import Stack from "@mui/material/Stack";
 //** Local Imports */
 import { ChildrenProps } from "types";
-import { SxProps, Theme } from "@mui/material";
+import { Box, SxProps, Theme } from "@mui/material";
 
 //** Typings */
 export interface PageLayoutProps extends ChildrenProps {
@@ -20,21 +20,7 @@ const defaultProps: Partial<PageLayoutProps> = {};
  * @surface
  */
 const PageLayout: React.FC<PageLayoutProps> = ({ children, sx }) => {
-  return (
-    <Stack
-      component="main"
-      spacing={2}
-      minHeight="100vh"
-      alignItems="center"
-      // paddingTop={(theme) => ({
-      //   tablet: theme.navbar.tablet,
-      //   mobile: theme.navbar.mobile,
-      // })}
-      sx={{ bgcolor: "secondary.main", ...sx }}
-    >
-      {children}
-    </Stack>
-  );
+  return <>{children}</>;
 };
 
 PageLayout.defaultProps = defaultProps;
