@@ -107,7 +107,11 @@ function Pricing() {
             </MKTypography>
             <Stack direction="row" spacing={1} mt={6} mb={3}>
               <Link href="/portfolio#pricing" passHref>
-                <MKButton component={MuiLink} variant="text" color="info">
+                <MKButton
+                  component={MuiLink}
+                  variant="gradient"
+                  color="warning"
+                >
                   comprar
                 </MKButton>
               </Link>
