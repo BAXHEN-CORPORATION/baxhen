@@ -111,15 +111,6 @@ function Pricing() {
                   comprar
                 </MKButton>
               </Link>
-              <MKButton
-                component={MuiLink}
-                target="__blank"
-                href="https://sowl.co/W5Qou"
-                variant="gradient"
-                color="warning"
-              >
-                comprar
-              </MKButton>
 
               <MKButton
                 component={MuiLink}
