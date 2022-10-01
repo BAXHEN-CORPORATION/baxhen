@@ -32,7 +32,6 @@ import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 
 // Pricing page sections
 import AboutUs from "layouts/portfolio/sections/AboutUs";
-import CtaOne from "layouts/portfolio/sections/CtaOne";
 import PricingSection from "layouts/portfolio/sections/Pricing";
 import Testimonials from "layouts/portfolio/sections/Testimonials";
 
@@ -47,7 +46,7 @@ import Faq from "../../layouts/portfolio/sections/Faq";
 function Pricing() {
   return (
     <>
-      {/* <DefaultNavbar
+      <DefaultNavbar
         brand="baxhen"
         routes={[]}
         action={{
@@ -57,7 +56,7 @@ function Pricing() {
           color: "warning",
         }}
         sticky
-      /> */}
+      />
       <MKBox
         minHeight="75vh"
         width="100%"
@@ -107,6 +106,11 @@ function Pricing() {
               conquistas.
             </MKTypography>
             <Stack direction="row" spacing={1} mt={6} mb={3}>
+              <Link href="/portfolio#pricing" passHref>
+                <MKButton component={MuiLink} variant="text" color="info">
+                  comprar
+                </MKButton>
+              </Link>
               <MKButton
                 component={MuiLink}
                 target="__blank"
@@ -116,11 +120,16 @@ function Pricing() {
               >
                 comprar
               </MKButton>
-              <Link href="/portfolio#cta" passHref>
-                <MKButton component={MuiLink} variant="text" color="info">
-                  quero testar sem compromisso
-                </MKButton>
-              </Link>
+
+              <MKButton
+                component={MuiLink}
+                href="https://tiny-macaron-3edcdf.netlify.app"
+                target="__blank"
+                variant="gradient"
+                color="info"
+              >
+                Exemplo ao Vivo
+              </MKButton>
             </Stack>
           </Grid>
         </Container>
@@ -142,8 +151,6 @@ function Pricing() {
         <Testimonials />
 
         <PricingSection />
-
-        <CtaOne />
 
         <Faq />
       </Card>

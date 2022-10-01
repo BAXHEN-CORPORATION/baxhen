@@ -86,10 +86,10 @@ function Pricing() {
             <Grid container spacing={3} justifyContent="center">
               <Grid item xs={12} lg={4}>
                 <DefaultPricingCard
-                  badge={{ color: "light", label: "Gratis" }}
+                  badge={{ color: "light", label: "Popular" }}
                   price={{
                     currency: "R$",
-                    value: 0,
+                    value: 7,
                     type: ",00",
                   }}
                   specifications={[
@@ -97,7 +97,7 @@ function Pricing() {
                     { label: "Experiências", includes: true },
                     { label: "Habilidades", includes: true },
                     { label: "Melhores projetos", includes: true },
-                    { label: "Download currículo", includes: false },
+                    { label: "Download currículo", includes: true },
                     { label: "Links sociais", includes: true },
                     { label: "Suporte em vídeo", includes: true },
                     { label: "Página de projetos", includes: false },
@@ -106,10 +106,10 @@ function Pricing() {
                     { label: "Suporte por email", includes: false },
                   ]}
                   action={{
-                    type: "internal",
-                    route: "/portfolio#cta",
+                    type: "external",
+                    route: "https://sowl.co/vhstY",
                     color: "dark",
-                    label: "quero testar",
+                    label: "quero o mais popular",
                   }}
                 />
               </Grid>
