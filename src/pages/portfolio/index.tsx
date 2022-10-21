@@ -118,7 +118,7 @@ function Pricing() {
 
               <MKButton
                 component={MuiLink}
-                href="https://tiny-macaron-3edcdf.netlify.app"
+                href="https://tp-portfolio.baxhen.com"
                 target="__blank"
                 variant="gradient"
                 color="info"
