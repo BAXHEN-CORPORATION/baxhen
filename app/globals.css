@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0a0a;
+  --foreground: #ffffff;
 }
 
 @theme inline {
@@ -12,15 +12,28 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
 }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes dotPulse {
+  0%, 100% { opacity: 0.2; }
+  50%       { opacity: 0.9; }
+}
+
+.hero-badge    { animation: fadeUp 0.55s ease both 0.05s; }
+.hero-headline { animation: fadeUp 0.55s ease both 0.15s; }
+.hero-body     { animation: fadeUp 0.55s ease both 0.25s; }
+.hero-cta      { animation: fadeUp 0.55s ease both 0.35s; }
+.hero-phone    { animation: fadeUp 0.65s ease both 0.25s; }
+
+.dot-1 { animation: dotPulse 1.4s ease-in-out infinite 0.0s; }
+.dot-2 { animation: dotPulse 1.4s ease-in-out infinite 0.2s; }
+.dot-3 { animation: dotPulse 1.4s ease-in-out infinite 0.4s; }
