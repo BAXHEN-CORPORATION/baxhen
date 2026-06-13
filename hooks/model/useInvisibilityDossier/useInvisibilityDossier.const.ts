@@ -1,7 +1,6 @@
 import type { Message } from "./useInvisibilityDossier.types";
 
-export const NEXT_ROUTE =
-  "/funnels/baxhen/invisibility-investigation/variant-a/revelation";
+export const NEXT_ROUTE = "/";
 
 export const EVIDENCE_AUDIO_PATH = "/audios/evidence-01.mp3";
 
