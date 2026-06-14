@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Phone, PhoneOff, Volume2, User, Wifi, Battery } from "lucide-react";
+import { Phone, PhoneOff, Volume2, User, Wifi } from "lucide-react";
 import type { IPhoneCallScreenProps } from "./iphone-call-screen.types";
 import { ActionButton } from "./iphone-call-screen.components";
 import { CALLER_NAME, CALLER_TYPE, RINGS } from "./iphone-call-screen.const";
@@ -156,7 +156,7 @@ const ActionGrid = ({
 // HangupButton
 // ---------------------------------------------------------------------------
 
-const HangupButton = ({ onClick }: { onClick: () => void }) => (
+const HangupButton = ({ onClick }: { onClick?: () => void }) => (
   <div className="flex flex-shrink-0 flex-col items-center pb-12">
     <motion.button
       onClick={onClick}

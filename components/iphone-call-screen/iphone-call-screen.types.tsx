@@ -16,7 +16,7 @@ export interface IPhoneCallScreenProps {
   currentTime: string;
   callButtons: CallButton[];
   onAnswer: () => void;
-  onEndCall: () => void;
+  onEndCall?: () => void;
   onToggleMute: () => void;
   onToggleSpeaker: () => void;
   onRetryIncomingAudio: () => void;
