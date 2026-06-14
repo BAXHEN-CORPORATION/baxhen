@@ -99,14 +99,12 @@ export const useInvisibilityDossier = (): InvisibilityDossierModel => {
 
   // ── Step driver: shows messages one by one ──
   useEffect(() => {
-    if (cancelledRef.current) return;
     if (currentStep >= SCRIPT.length) return;
 
     const msg = SCRIPT[currentStep];
     if (!msg) return; // defensive: guard against out-of-bounds
 
     const showMessage = () => {
-      if (cancelledRef.current) return;
       setIsTyping(false);
       setMessages((prev) => [...prev, msg]);
 
@@ -123,9 +121,7 @@ export const useInvisibilityDossier = (): InvisibilityDossierModel => {
         // Text or case-file: advance after a short delay
         const after = msg.type === "case-file" ? CASE_FILE_DELAY + 400 : SHORT_DELAY;
         advanceTimeoutRef.current = window.setTimeout(() => {
-          if (!cancelledRef.current) {
-            setCurrentStep((prev) => prev + 1);
-          }
+          setCurrentStep((prev) => prev + 1);
         }, after);
       }
     };
