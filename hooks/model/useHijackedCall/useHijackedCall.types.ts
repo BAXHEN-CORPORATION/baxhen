@@ -6,7 +6,6 @@ export interface HijackedCallModel {
   callState: CallState;
   formattedDuration: string;
   showRedirect: boolean;
-  currentTime: string;
   callButtons: CallButton[];
   onAnswer: () => void;
   onEndCall?: () => void;

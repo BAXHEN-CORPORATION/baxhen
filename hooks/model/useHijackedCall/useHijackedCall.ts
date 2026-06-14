@@ -3,7 +3,6 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { useCallAudio } from "@/hooks/useCallAudio";
-import { useIphoneCallScreenUtils } from "@/components/iphone-call-screen/iphone-call-screen.utils";
 import type { CallButton } from "@/components/iphone-call-screen/iphone-call-screen.types";
 import { ACTION_BUTTONS } from "@/components/iphone-call-screen/iphone-call-screen.const";
 import type { CallState, HijackedCallModel } from "./useHijackedCall.types";
@@ -92,8 +91,6 @@ export const useHijackedCall = (): HijackedCallModel => {
   const onToggleSpeaker = useCallback(() => setIsSpeaker((v) => !v), []);
 
   // ── Derived ──
-  const { currentTime } = useIphoneCallScreenUtils();
-
   const formattedDuration = formatTime(callSeconds);
 
   const callButtons: CallButton[] = useMemo(
@@ -112,7 +109,6 @@ export const useHijackedCall = (): HijackedCallModel => {
     callState,
     formattedDuration,
     showRedirect,
-    currentTime,
     callButtons,
     onAnswer,
     onToggleMute,

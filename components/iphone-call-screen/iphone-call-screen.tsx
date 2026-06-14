@@ -1,40 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Phone, PhoneOff, Volume2, User, Wifi } from "lucide-react";
+import { Phone, PhoneOff, Volume2, User } from "lucide-react";
 import type { IPhoneCallScreenProps } from "./iphone-call-screen.types";
 import { ActionButton } from "./iphone-call-screen.components";
+import { PhoneTopBar } from "@/components/ui/phone-top-bar";
 import { CALLER_NAME, CALLER_TYPE, RINGS } from "./iphone-call-screen.const";
-
-// ---------------------------------------------------------------------------
-// StatusBar
-// ---------------------------------------------------------------------------
-
-const StatusBar = ({ time }: { time: string }) => (
-  <div className="relative z-10 flex h-[44px] flex-shrink-0 items-center justify-between px-6 pb-2 pt-4">
-    <span className="text-[15px] font-semibold tabular-nums text-white">
-      {time}
-    </span>
-    <div className="flex items-center gap-1.5">
-      <div className="flex items-end gap-[2px]">
-        {([3, 5, 7, 9] as number[]).map((h, i) => (
-          <div
-            key={i}
-            className="w-[3px] rounded-sm bg-white"
-            style={{ height: `${h}px` }}
-          />
-        ))}
-      </div>
-      <Wifi size={15} />
-      <div className="flex items-center">
-        <div className="flex h-[11px] w-[22px] items-center rounded-[2px] border border-white/80 p-[1px]">
-          <div className="h-full w-[75%] rounded-[1px] bg-white" />
-        </div>
-        <div className="h-[5px] w-[2px] rounded-r-sm bg-white/50" />
-      </div>
-    </div>
-  </div>
-);
 
 // ---------------------------------------------------------------------------
 // IncomingAvatar
@@ -195,7 +166,6 @@ export const IPhoneCallScreen = ({
   callState,
   formattedDuration,
   showRedirect,
-  currentTime,
   callButtons,
   onAnswer,
   onEndCall,
@@ -212,7 +182,7 @@ export const IPhoneCallScreen = ({
       style={{ height: "100dvh" }}
     >
       <AtmosphericBg />
-      <StatusBar time={currentTime} />
+      <PhoneTopBar variant="dark" />
 
       {/* ── INCOMING ── */}
       {callState === "incoming" && (

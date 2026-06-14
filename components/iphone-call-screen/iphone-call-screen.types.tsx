@@ -13,7 +13,6 @@ export interface IPhoneCallScreenProps {
   callState: CallState;
   formattedDuration: string;
   showRedirect: boolean;
-  currentTime: string;
   callButtons: CallButton[];
   onAnswer: () => void;
   onEndCall?: () => void;
