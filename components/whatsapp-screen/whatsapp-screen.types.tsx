@@ -5,7 +5,13 @@ export interface WhatsAppScreenProps {
   isTyping: boolean;
   isTransitioning: boolean;
   playingAudioId: number | null;
-  audioProgress: number;
+  audioProgress: Record<number, number>;
+  showPdfViewer: boolean;
+  pdfPage: number;
+  pdfFilename: string;
   onAudioPlay: (id: number) => void;
+  onOpenPdf: () => void;
+  onClosePdf: () => void;
+  onPdfNavigate: (page: number) => void;
   onAccessRevelation: () => void;
 }

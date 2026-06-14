@@ -11,6 +11,7 @@ import {
   SHORT_DELAY,
   AUDIO_DELAY,
   CASE_FILE_DELAY,
+  PDF_DOCUMENT_DELAY,
   TRANSITION_DURATION,
 } from "./useInvisibilityDossier.const";
 
@@ -22,7 +23,9 @@ export const useInvisibilityDossier = (): InvisibilityDossierModel => {
   const [currentStep, setCurrentStep] = useState(0);
   const [isWaitingForAudio, setIsWaitingForAudio] = useState(false);
   const [playingAudioId, setPlayingAudioId] = useState<number | null>(null);
-  const [audioProgress, setAudioProgress] = useState(0);
+  const [audioProgress, setAudioProgress] = useState<Record<number, number>>({});
+  const [showPdfViewer, setShowPdfViewer] = useState(false);
+  const [pdfPage, setPdfPage] = useState(1);
   const cancelledRef = useRef(false);
   const showTimeoutRef = useRef<number | null>(null);
   const advanceTimeoutRef = useRef<number | null>(null);
@@ -34,23 +37,47 @@ export const useInvisibilityDossier = (): InvisibilityDossierModel => {
 
   // ── Audio: plays when user taps the bubble ──
   const advanceAfterAudio = useCallback(() => {
+    setAudioProgress((prev) => {
+      if (playingAudioId === null) return prev;
+      const next = { ...prev };
+      next[playingAudioId] = 1;
+      return next;
+    });
     setIsWaitingForAudio(false);
     setPlayingAudioId(null);
-    setAudioProgress(0);
     setCurrentStep((prev) => prev + 1);
-  }, []);
+  }, [playingAudioId]);
 
-  useCallAudio(EVIDENCE_AUDIO_PATH, {
+  const activeAudioSrc =
+    playingAudioId !== null
+      ? SCRIPT.find((m) => m.id === playingAudioId)?.audioSrc ?? EVIDENCE_AUDIO_PATH
+      : EVIDENCE_AUDIO_PATH;
+
+  useCallAudio(activeAudioSrc, {
     enabled: isWaitingForAudio,
     onEnded: advanceAfterAudio,
   });
 
+  const pdfFilename = "The Memory Problem";
+
+  // ── PDF viewer callbacks ──
+  const onOpenPdf = useCallback(() => {
+    setShowPdfViewer(true);
+    setPdfPage(1);
+  }, []);
+
+  const onClosePdf = useCallback(() => {
+    setShowPdfViewer(false);
+    setCurrentStep((prev) => prev + 1);
+  }, []);
+
+  const onPdfNavigate = useCallback((page: number) => {
+    setPdfPage(page);
+  }, []);
+
   // ── Progress tracker: advances 0→1 while audio plays ──
   useEffect(() => {
-    if (!isWaitingForAudio || playingAudioId === null) {
-      setAudioProgress(0);
-      return;
-    }
+    if (!isWaitingForAudio || playingAudioId === null) return;
 
     // Get duration from the current audio message
     const msg = SCRIPT.find((m) => m.id === playingAudioId);
@@ -61,8 +88,9 @@ export const useInvisibilityDossier = (): InvisibilityDossierModel => {
     const tickRate = 100; // ms
     const interval = setInterval(() => {
       setAudioProgress((prev) => {
-        const next = prev + tickRate / totalMs;
-        return next >= 1 ? 1 : next;
+        const current = prev[playingAudioId] ?? 0;
+        const next = current + tickRate / totalMs;
+        return { ...prev, [playingAudioId]: next >= 1 ? 1 : next };
       });
     }, tickRate);
 
@@ -86,6 +114,9 @@ export const useInvisibilityDossier = (): InvisibilityDossierModel => {
         // Bubble appears — waits for user to tap play
         // onAudioPlay will set playingAudioId + isWaitingForAudio
         // advanceAfterAudio will fire when audio ends
+      } else if (msg.type === "pdf-document") {
+        // Bubble appears — waits for user to tap download, view PDF, and close
+        // onClosePdf advances currentStep
       } else if (msg.type === "button") {
         // Final message — stop auto-advancing
       } else {
@@ -106,7 +137,9 @@ export const useInvisibilityDossier = (): InvisibilityDossierModel => {
         ? AUDIO_DELAY
         : msg.type === "case-file"
           ? CASE_FILE_DELAY
-          : SHORT_DELAY;
+          : msg.type === "pdf-document"
+            ? PDF_DOCUMENT_DELAY
+            : SHORT_DELAY;
 
     showTimeoutRef.current = window.setTimeout(showMessage, typingDuration);
 
@@ -140,7 +173,7 @@ export const useInvisibilityDossier = (): InvisibilityDossierModel => {
         setIsWaitingForAudio(true);
       } else {
         // First tap on this bubble — start playback
-        setAudioProgress(0);
+        setAudioProgress((prev) => ({ ...prev, [id]: 0 }));
         setPlayingAudioId(id);
         setIsWaitingForAudio(true);
       }
@@ -167,7 +200,13 @@ export const useInvisibilityDossier = (): InvisibilityDossierModel => {
     isTransitioning,
     playingAudioId,
     audioProgress,
+    showPdfViewer,
+    pdfPage,
+    pdfFilename,
     onAudioPlay,
+    onOpenPdf,
+    onClosePdf,
+    onPdfNavigate,
     onAccessRevelation,
   };
 };

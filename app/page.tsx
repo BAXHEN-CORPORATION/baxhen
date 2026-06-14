@@ -80,8 +80,8 @@ const stats = [
 // ── Page ─────────────────────────────────────────────────────────────────────
 
 export default function Home() {
-  const experienceFunnelUrl   = process.env.NEXT_PUBLIC_EXPERIENCE_FUNNEL_URL   ?? "#"
-  const startExperienceUrl    = process.env.NEXT_PUBLIC_START_EXPERIENCE_URL    ?? "#"
+  const experienceFunnelUrl   = process.env.NEXT_PUBLIC_EXPERIENCE_FUNNEL_URL   ?? "/funnels/baxhen/invisibility-investigation/variant-a/hijacked-call"
+  const startExperienceUrl    = process.env.NEXT_PUBLIC_START_EXPERIENCE_URL    ?? "/funnels/baxhen/invisibility-investigation/variant-a/hijacked-call"
   const startConversationUrl  = process.env.NEXT_PUBLIC_START_CONVERSATION_URL  ?? "#"
 
   return (

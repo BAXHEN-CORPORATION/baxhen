@@ -1,9 +1,13 @@
 export interface Message {
   id: number;
-  type: "text" | "audio" | "case-file" | "button";
+  type: "text" | "audio" | "case-file" | "button" | "pdf-document";
   text?: string;
   title?: string;
   duration?: string;
+  audioSrc?: string;
+  pdfFilename?: string;
+  pdfPageCount?: string;
+  pdfFileSize?: string;
   sender: "baxhen" | "user";
   timestamp: string;
   status?: "sent" | "delivered" | "read";
@@ -14,7 +18,13 @@ export interface InvisibilityDossierModel {
   isTyping: boolean;
   isTransitioning: boolean;
   playingAudioId: number | null;
-  audioProgress: number;
+  audioProgress: Record<number, number>;
+  showPdfViewer: boolean;
+  pdfPage: number;
+  pdfFilename: string;
   onAudioPlay: (id: number) => void;
+  onOpenPdf: () => void;
+  onClosePdf: () => void;
+  onPdfNavigate: (page: number) => void;
   onAccessRevelation: () => void;
 }

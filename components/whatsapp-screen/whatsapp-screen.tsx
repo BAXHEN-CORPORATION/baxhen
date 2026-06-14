@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import type { WhatsAppScreenProps } from "./whatsapp-screen.types";
 import { MessageBubble } from "./whatsapp-screen.components";
+import { PdfViewer } from "@/components/pdf-viewer";
 import {
   CONTACT_NAME,
   CONTACT_STATUS,
@@ -259,7 +260,13 @@ export const WhatsAppScreen = ({
   isTransitioning,
   playingAudioId,
   audioProgress,
+  showPdfViewer,
+  pdfPage,
+  pdfFilename,
   onAudioPlay,
+  onOpenPdf,
+  onClosePdf,
+  onPdfNavigate,
   onAccessRevelation,
 }: WhatsAppScreenProps) => {
   const chatEndRef = useRef<HTMLDivElement>(null);
@@ -311,8 +318,9 @@ export const WhatsAppScreen = ({
                   key={msg.id}
                   message={msg}
                   isPlaying={playingAudioId === msg.id}
-                  audioProgress={audioProgress}
+                  audioProgress={audioProgress[msg.id] ?? 0}
                   onAudioPlay={onAudioPlay}
+                  onOpenPdf={onOpenPdf}
                 />
               );
             })}
@@ -328,6 +336,14 @@ export const WhatsAppScreen = ({
         </div>
 
         {isTransitioning && <TransitionOverlay />}
+        {showPdfViewer && (
+          <PdfViewer
+            filename={pdfFilename}
+            currentPage={pdfPage}
+            onClose={onClosePdf}
+            onNavigate={onPdfNavigate}
+          />
+        )}
       </div>
     </main>
   );

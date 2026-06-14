@@ -1,6 +1,6 @@
 "use client";
 
-import { Play, Pause, CheckCheck } from "lucide-react";
+import { Play, Pause, Download, CheckCheck } from "lucide-react";
 import type { Message } from "@/hooks/model/useInvisibilityDossier";
 
 // ---------------------------------------------------------------------------
@@ -171,6 +171,85 @@ const AudioBubble = ({
 );
 
 // ---------------------------------------------------------------------------
+// PdfDocumentBubble — WhatsApp iOS PDF document preview
+// ---------------------------------------------------------------------------
+
+const PdfDocumentBubble = ({
+  message,
+  onOpenPdf,
+}: {
+  message: Message;
+  onOpenPdf: () => void;
+}) => (
+  <div className="flex justify-start">
+    <div
+      className="flex w-[280px] max-w-[85%] flex-col overflow-hidden rounded-[8px] bg-white shadow-sm"
+      style={{ fontFamily: "inherit" }}
+    >
+      {/* PDF preview thumbnail */}
+      <div className="flex flex-col gap-1.5 border-b border-[#E5E5EA] bg-white px-4 py-5">
+        <div className="h-[3px] w-[60%] rounded-full bg-[#CCC]" />
+        <div className="h-[3px] w-[85%] rounded-full bg-[#CCC]" />
+        <div className="h-[3px] w-[45%] rounded-full bg-[#CCC]" />
+        <div className="h-[3px] w-[70%] rounded-full bg-[#CCC]" />
+        <div className="h-[3px] w-[50%] rounded-full bg-[#CCC]" />
+        <div className="h-[3px] w-[75%] rounded-full bg-[#CCC]" />
+      </div>
+
+      {/* Document info bar */}
+      <div className="flex items-center gap-2.5 bg-[#F6F6F6] px-3 py-2.5">
+        {/* Red PDF icon */}
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M6 2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"
+            fill="#E53935"
+          />
+          <path d="M15 2v5h5" fill="#EF5350" />
+          <rect x="7" y="10" width="10" height="2" rx="0.5" fill="white" opacity="0.8" />
+          <rect x="7" y="14" width="7" height="2" rx="0.5" fill="white" opacity="0.6" />
+          <rect x="7" y="18" width="8" height="2" rx="0.5" fill="white" opacity="0.4" />
+        </svg>
+
+        <span className="flex-1 truncate text-[13px] font-[500] text-[#3B3B3B]">
+          {message.pdfFilename ?? "Document"}
+        </span>
+
+        <button
+          type="button"
+          aria-label="Open PDF"
+          onClick={onOpenPdf}
+          className="flex h-[28px] w-[28px] flex-shrink-0 items-center justify-center rounded-full bg-[#E8E8E8] transition hover:bg-[#DDD] focus:outline-none focus:ring-2 focus:ring-[#075E54]/40"
+        >
+          <Download size={14} className="text-[#667781]" />
+        </button>
+      </div>
+
+      {/* Metadata + timestamp */}
+      <div className="flex items-center justify-between px-3 py-1.5">
+        <span className="text-[11px] text-[#667781]">
+          {message.pdfPageCount} pages &middot; PDF &middot;{" "}
+          {message.pdfFileSize}
+        </span>
+        <div className="flex items-center gap-1">
+          <span className="text-[11px] text-[#B0B3B8]">
+            {message.timestamp}
+          </span>
+          {message.status === "read" && (
+            <CheckCheck size={14} className="text-[#34B7F1]" />
+          )}
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+// ---------------------------------------------------------------------------
 // MessageBubble
 // ---------------------------------------------------------------------------
 
@@ -179,11 +258,13 @@ export const MessageBubble = ({
   isPlaying,
   audioProgress,
   onAudioPlay,
+  onOpenPdf,
 }: {
   message: Message;
   isPlaying: boolean;
   audioProgress: number;
   onAudioPlay: (id: number) => void;
+  onOpenPdf: () => void;
 }) => {
   if (message.type === "text") {
     return <TextBubble message={message} />;
@@ -198,6 +279,10 @@ export const MessageBubble = ({
         onToggle={() => onAudioPlay(message.id)}
       />
     );
+  }
+
+  if (message.type === "pdf-document") {
+    return <PdfDocumentBubble message={message} onOpenPdf={onOpenPdf} />;
   }
 
   return null;
