@@ -1,6 +1,6 @@
 import { MicOff, Grid3X3, Volume2, Plus, Video, User } from "lucide-react";
 
-export const CALLER_NAME = "Baxhen";
+export const CALLER_NAME = "Invisible Business";
 export const CALLER_TYPE = "mobile";
 export const REFRESH_INTERVAL = 30_000;
 

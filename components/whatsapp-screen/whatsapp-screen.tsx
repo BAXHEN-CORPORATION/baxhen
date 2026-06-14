@@ -70,8 +70,12 @@ const Header = () => (
     </button>
 
     {/* Avatar */}
-    <div className="flex h-[34px] w-[34px] flex-shrink-0 items-center justify-center rounded-full bg-black">
-      <span className="text-[13px] font-bold text-white">BX</span>
+    <div className="flex h-[34px] w-[34px] flex-shrink-0 items-center justify-center rounded-full bg-black overflow-hidden">
+      <img
+        src="/images/icon-no-bg.png"
+        alt={CONTACT_NAME}
+        className="h-full w-full object-cover"
+      />
     </div>
 
     {/* Name + status */}

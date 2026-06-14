@@ -111,8 +111,12 @@ const AudioBubble = ({
 
         {/* Avatar with mic overlay on bottom-right */}
         <div className="relative flex-shrink-0">
-          <div className="flex h-[40px] w-[40px] items-center justify-center rounded-full bg-black">
-            <span className="text-[13px] font-bold text-white">BX</span>
+          <div className="flex h-[40px] w-[40px] items-center justify-center rounded-full bg-black overflow-hidden">
+            <img
+              src="/images/icon-no-bg.png"
+              alt="Baxhen"
+              className="h-full w-full object-cover"
+            />
           </div>
           {/* Mic icon — positioned on bottom-right corner of avatar */}
           <div className="absolute -bottom-0.5 -left-0.5 flex h-[18px] w-[18px] items-center justify-center rounded-full bg-[#027EB5]">

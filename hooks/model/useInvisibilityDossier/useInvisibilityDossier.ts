@@ -24,6 +24,8 @@ export const useInvisibilityDossier = (): InvisibilityDossierModel => {
   const [playingAudioId, setPlayingAudioId] = useState<number | null>(null);
   const [audioProgress, setAudioProgress] = useState(0);
   const cancelledRef = useRef(false);
+  const showTimeoutRef = useRef<number | null>(null);
+  const advanceTimeoutRef = useRef<number | null>(null);
 
   // Prefetch next route
   useEffect(() => {
@@ -73,7 +75,7 @@ export const useInvisibilityDossier = (): InvisibilityDossierModel => {
     if (currentStep >= SCRIPT.length) return;
 
     const msg = SCRIPT[currentStep];
-    let timeout: number;
+    if (!msg) return; // defensive: guard against out-of-bounds
 
     const showMessage = () => {
       if (cancelledRef.current) return;
@@ -89,7 +91,7 @@ export const useInvisibilityDossier = (): InvisibilityDossierModel => {
       } else {
         // Text or case-file: advance after a short delay
         const after = msg.type === "case-file" ? CASE_FILE_DELAY + 400 : SHORT_DELAY;
-        timeout = window.setTimeout(() => {
+        advanceTimeoutRef.current = window.setTimeout(() => {
           if (!cancelledRef.current) {
             setCurrentStep((prev) => prev + 1);
           }
@@ -106,10 +108,17 @@ export const useInvisibilityDossier = (): InvisibilityDossierModel => {
           ? CASE_FILE_DELAY
           : SHORT_DELAY;
 
-    timeout = window.setTimeout(showMessage, typingDuration);
+    showTimeoutRef.current = window.setTimeout(showMessage, typingDuration);
 
     return () => {
-      clearTimeout(timeout);
+      if (showTimeoutRef.current !== null) {
+        clearTimeout(showTimeoutRef.current);
+        showTimeoutRef.current = null;
+      }
+      if (advanceTimeoutRef.current !== null) {
+        clearTimeout(advanceTimeoutRef.current);
+        advanceTimeoutRef.current = null;
+      }
     };
   }, [currentStep]);
 
