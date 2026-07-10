@@ -86,7 +86,13 @@ export const useHijackedCall = (): HijackedCallModel => {
   }, [callState, router]);
 
   // ── Actions ──
-  const onAnswer = useCallback(() => setCallState("active"), []);
+  const onAnswer = useCallback(() => {
+    // Request fullscreen on answer
+    if (document.documentElement.requestFullscreen) {
+      document.documentElement.requestFullscreen().catch(() => {});
+    }
+    setCallState("active");
+  }, []);
   const onToggleMute = useCallback(() => setIsMuted((v) => !v), []);
   const onToggleSpeaker = useCallback(() => setIsSpeaker((v) => !v), []);
 
