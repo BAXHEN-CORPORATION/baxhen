@@ -8,7 +8,7 @@ export interface HijackedCallModel {
   showRedirect: boolean;
   callButtons: CallButton[];
   onAnswer: () => void;
-  onEndCall?: () => void;
+  onEndCall: () => void;
   onToggleMute: () => void;
   onToggleSpeaker: () => void;
   onRetryIncomingAudio: () => void;

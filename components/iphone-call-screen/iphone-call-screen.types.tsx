@@ -15,7 +15,7 @@ export interface IPhoneCallScreenProps {
   showRedirect: boolean;
   callButtons: CallButton[];
   onAnswer: () => void;
-  onEndCall?: () => void;
+  onEndCall: () => void;
   onToggleMute: () => void;
   onToggleSpeaker: () => void;
   onRetryIncomingAudio: () => void;

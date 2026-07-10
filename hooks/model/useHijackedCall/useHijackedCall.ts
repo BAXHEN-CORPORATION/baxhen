@@ -111,6 +111,7 @@ export const useHijackedCall = (): HijackedCallModel => {
     showRedirect,
     callButtons,
     onAnswer,
+    onEndCall: handleEndCall,
     onToggleMute,
     onToggleSpeaker,
     onRetryIncomingAudio: incomingAudio.retryPlay,
