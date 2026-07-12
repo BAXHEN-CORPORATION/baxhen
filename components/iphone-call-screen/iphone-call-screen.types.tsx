@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import type { CallState } from "@/hooks/model/useHijackedCall";
+import type { CallState, CallScreenLabels } from "@/hooks/model/useHijackedCall";
 
 export type { CallState };
 
@@ -14,6 +14,7 @@ export interface IPhoneCallScreenProps {
   formattedDuration: string;
   showRedirect: boolean;
   callButtons: CallButton[];
+  labels: CallScreenLabels;
   onAnswer: () => void;
   onEndCall: () => void;
   onToggleMute: () => void;

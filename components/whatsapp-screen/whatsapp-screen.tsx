@@ -22,7 +22,7 @@ import {
 // Header
 // ---------------------------------------------------------------------------
 
-const Header = () => (
+const Header = ({ onlineStatus }: { onlineStatus: string }) => (
   <div className="flex h-[44px] flex-shrink-0 items-center gap-1 border-b border-[#E0E0E0] bg-white px-2">
     {/* iOS back arrow — blue */}
     <button
@@ -51,7 +51,7 @@ const Header = () => (
         {CONTACT_NAME}
       </span>
       <span className="text-[12px] font-[400] text-[#8E8E93]">
-        {CONTACT_STATUS}
+        {onlineStatus}
       </span>
     </div>
 
@@ -226,6 +226,7 @@ export const WhatsAppScreen = ({
   showPdfViewer,
   pdfPage,
   pdfFilename,
+  labels,
   onAudioPlay,
   onOpenPdf,
   onClosePdf,
@@ -253,7 +254,7 @@ export const WhatsAppScreen = ({
         {/* Top bar: StatusBar + Header combined */}
         <div className="flex-shrink-0 bg-white">
           <PhoneTopBar variant="light" />
-          <Header />
+          <Header onlineStatus={labels.online} />
         </div>
 
         {/* Chat area */}

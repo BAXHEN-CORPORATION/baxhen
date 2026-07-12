@@ -1,3 +1,8 @@
+"use client";
+
+import { Suspense } from "react";
+import { useLanguage } from "@/hooks/useLanguage";
+
 // ── Icons ────────────────────────────────────────────────────────────────────
 
 function IconWhatsApp() {
@@ -46,40 +51,37 @@ function IconChat() {
 const features = [
   {
     Icon: IconWhatsApp,
-    title: "WhatsApp narratives",
-    description:
-      "Narrative chat flows that feel like real conversations, built for massive scale.",
+    titleKey: "whatsappNarratives",
+    descriptionKey: "whatsappDesc",
   },
   {
     Icon: IconPhone,
-    title: "Simulated calls",
-    description:
-      "Interactive voice-style experiences that build deep trust without a single dial.",
+    titleKey: "simulatedCalls",
+    descriptionKey: "callsDesc",
   },
   {
     Icon: IconSms,
-    title: "SMS journeys",
-    description:
-      "Text-message journeys that build progressive trust and close the deal automatically.",
+    titleKey: "smsJourneys",
+    descriptionKey: "smsDesc",
   },
   {
     Icon: IconLoyalty,
-    title: "Lifetime loyalty",
-    description:
-      "Progress, choices, and rewards built into every single step of the funnel.",
+    titleKey: "lifetimeLoyalty",
+    descriptionKey: "loyaltyDesc",
   },
 ] as const
 
 const stats = [
-  { value: "3x",   label: "Conversion Lift" },
-  { value: "68%",  label: "More Engagement" },
-  { value: "100%", label: "Custom-Built"    },
-  { value: "0",    label: "Templates"       },
+  { value: "3x",   labelKey: "conversionLift" },
+  { value: "68%",  labelKey: "moreEngagement" },
+  { value: "100%", labelKey: "customBuilt"    },
+  { value: "0",    labelKey: "templates"      },
 ] as const
 
 // ── Page ─────────────────────────────────────────────────────────────────────
 
-export default function Home() {
+function HomeContent() {
+  const { t } = useLanguage();
   const experienceFunnelUrl   = process.env.NEXT_PUBLIC_EXPERIENCE_FUNNEL_URL   ?? "/funnels/baxhen/invisibility-investigation/variant-a/hijacked-call"
   const startExperienceUrl    = process.env.NEXT_PUBLIC_START_EXPERIENCE_URL    ?? "/funnels/baxhen/invisibility-investigation/variant-a/hijacked-call"
   const startConversationUrl  = process.env.NEXT_PUBLIC_START_CONVERSATION_URL  ?? "#"
@@ -107,7 +109,7 @@ export default function Home() {
           className="text-xs font-semibold tracking-wide px-5 py-2.5 rounded-full transition-opacity hover:opacity-80"
           style={{ background: "#00e5ff", color: "#000" }}
         >
-          start the experience ↗
+          {t("startExperience")}
         </a>
       </header>
 
@@ -131,18 +133,16 @@ export default function Home() {
               style={{ border: "1px solid #1e1e1e", color: "#666" }}
             >
               <span style={{ color: "#00e5ff", fontSize: "6px" }}>●</span>
-              Gamified Sales Experiences
+              {t("gamifiedBadge")}
             </div>
 
             <h1 className="hero-headline text-5xl md:text-6xl lg:text-[64px] font-semibold leading-[1.06] tracking-tight lowercase">
-              your ads should feel like a{" "}
-              <span style={{ color: "#00e5ff" }}>conversation</span>
+              {t("heroHeadline")}{" "}
+              <span style={{ color: "#00e5ff" }}>{t("conversation")}</span>
             </h1>
 
             <p className="hero-body text-sm md:text-base leading-relaxed max-w-sm" style={{ color: "#777" }}>
-              We build interactive sales experiences — simulated calls, WhatsApp
-              threads, SMS narratives — that guide your prospect to a yes,
-              without feeling like a pitch.
+              {t("heroBody")}
             </p>
 
             <a
@@ -150,7 +150,7 @@ export default function Home() {
               className="hero-cta inline-flex w-fit items-center text-[11px] font-bold tracking-widest uppercase px-6 py-3.5 rounded-sm transition-all duration-200 hover:bg-[#00e5ff] hover:text-black"
               style={{ border: "1px solid #00e5ff", color: "#00e5ff" }}
             >
-              Experience a Funnel
+              {t("experienceFunnel")}
             </a>
           </div>
 
@@ -219,20 +219,20 @@ export default function Home() {
                     </div>
                     <div>
                       <div className="text-[11px] font-semibold">Leonardo · Baxhen</div>
-                      <div className="text-[10px] font-medium" style={{ color: "#4ade80" }}>online</div>
+                      <div className="text-[10px] font-medium" style={{ color: "#4ade80" }}>{t("online")}</div>
                     </div>
                   </div>
 
                   {/* Messages */}
                   <div className="flex flex-col gap-3 px-4 pt-4 pb-2">
                     <div className="text-[11px] px-3.5 py-2.5 rounded-2xl rounded-tl-sm leading-relaxed max-w-[88%]" style={{ background: "#1e1e1e", color: "#ccc" }}>
-                      hey! saw you checked out our page 🤙
+                      {t("heyMessage")}
                     </div>
                     <div className="text-[11px] px-3.5 py-2.5 rounded-2xl rounded-tr-sm leading-relaxed max-w-[76%] self-end" style={{ background: "#00e5ff", color: "#000" }}>
-                      yeah, curious about the funnels
+                      {t("yeahMessage")}
                     </div>
                     <div className="text-[11px] px-3.5 py-2.5 rounded-2xl rounded-tl-sm leading-relaxed max-w-[92%]" style={{ background: "#1e1e1e", color: "#ccc" }}>
-                      cool — what's your main challenge right now, getting leads or converting them?
+                      {t("coolMessage")}
                     </div>
                   </div>
 
@@ -246,7 +246,7 @@ export default function Home() {
                   {/* iMessage input bar */}
                   <div className="flex items-center gap-2 px-3 py-2" style={{ borderTop: "1px solid #2a2a2a" }}>
                     <div className="flex-1 flex items-center px-3 py-1.5 rounded-full" style={{ background: "#2c2c2e", border: "1px solid #3a3a3c" }}>
-                      <span className="text-[10px]" style={{ color: "#555" }}>Message</span>
+                      <span className="text-[10px]" style={{ color: "#555" }}>{t("messagePlaceholder")}</span>
                     </div>
                     <div className="w-6 h-6 rounded-full flex items-center justify-center" style={{ background: "#00e5ff" }}>
                       <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
@@ -305,8 +305,8 @@ export default function Home() {
       {/* ── STATS ───────────────────────────────────────────────── */}
       <div style={{ borderTop: "1px solid #161616", borderBottom: "1px solid #161616" }}>
         <div className="max-w-7xl mx-auto px-6 md:px-12 py-10 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          {stats.map(({ value, label }) => (
-            <div key={label} className="flex flex-col gap-2 items-center">
+          {stats.map(({ value, labelKey }) => (
+            <div key={labelKey} className="flex flex-col gap-2 items-center">
               <span
                 className="text-[40px] font-bold leading-none tracking-tight"
                 style={{ color: "#00e5ff" }}
@@ -317,7 +317,7 @@ export default function Home() {
                 className="text-[10px] uppercase tracking-widest font-semibold"
                 style={{ color: "#555" }}
               >
-                {label}
+                {t(labelKey)}
               </span>
             </div>
           ))}
@@ -327,9 +327,9 @@ export default function Home() {
       {/* ── FEATURES ────────────────────────────────────────────── */}
       <section className="py-20 px-6 md:px-12">
         <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {features.map(({ Icon, title, description }) => (
+          {features.map(({ Icon, titleKey, descriptionKey }) => (
             <div
-              key={title}
+              key={titleKey}
               className="flex flex-col gap-5 p-6 rounded-2xl transition-colors duration-200 hover:border-[#2a2a2a]"
               style={{ background: "#111", border: "1px solid #1a1a1a" }}
             >
@@ -340,9 +340,9 @@ export default function Home() {
                 <Icon />
               </div>
               <div className="flex flex-col gap-2">
-                <h3 className="font-semibold text-sm">{title}</h3>
+                <h3 className="font-semibold text-sm">{t(titleKey)}</h3>
                 <p className="text-xs leading-relaxed" style={{ color: "#666" }}>
-                  {description}
+                  {t(descriptionKey)}
                 </p>
               </div>
             </div>
@@ -354,13 +354,13 @@ export default function Home() {
       <section className="py-32 px-6 text-center">
         <div className="max-w-2xl mx-auto flex flex-col items-center gap-5">
           <h2 className="text-4xl md:text-5xl font-semibold leading-tight tracking-tight lowercase">
-            let's talk about your customers
+            {t("letsTalk")}
           </h2>
           <p className="text-base font-medium" style={{ color: "#00e5ff" }}>
-            let's work together
+            {t("letsWork")}
           </p>
           <p className="text-sm" style={{ color: "#555" }}>
-            no forms. no commitments. just a real conversation.
+            {t("noForms")}
           </p>
           <a
             href={startConversationUrl}
@@ -368,7 +368,7 @@ export default function Home() {
             style={{ background: "#00e676", color: "#000" }}
           >
             <IconChat />
-            Start a Conversation
+            {t("startConversation")}
           </a>
         </div>
       </section>
@@ -383,24 +383,32 @@ export default function Home() {
         </a>
 
         <nav className="flex items-center gap-6">
-          {(["privacy policy", "terms of service", "security"] as const).map(
-            (link) => (
+          {(["privacyPolicy", "termsOfService", "security"] as const).map(
+            (key) => (
               <a
-                key={link}
+                key={key}
                 href="#"
                 className="text-xs transition-colors duration-150 hover:text-white"
                 style={{ color: "#444" }}
               >
-                {link}
+                {t(key)}
               </a>
             )
           )}
         </nav>
 
         <p className="text-[11px]" style={{ color: "#333" }}>
-          © 2026 Baxhen. All rights reserved. Built for selling experiences.
+          {t("footer").replace("{year}", String(new Date().getFullYear()))}
         </p>
       </footer>
     </div>
   )
+}
+
+export default function Home() {
+  return (
+    <Suspense>
+      <HomeContent />
+    </Suspense>
+  );
 }

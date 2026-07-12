@@ -1,5 +1,5 @@
 export { useHijackedCall } from "./useHijackedCall";
-export type { HijackedCallModel, CallState } from "./useHijackedCall.types";
+export type { HijackedCallModel, CallState, CallScreenLabels } from "./useHijackedCall.types";
 
 import type { HookManifest } from "@/lib/manifest/types";
 

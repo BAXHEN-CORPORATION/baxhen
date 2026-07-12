@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { useCallAudio } from "@/hooks/useCallAudio";
-import type { InvisibilityDossierModel } from "./useInvisibilityDossier.types";
+import { useLanguage } from "@/hooks/useLanguage";
+import type { InvisibilityDossierModel, Message } from "./useInvisibilityDossier.types";
 import {
   SCRIPT,
   NEXT_ROUTE,
@@ -17,7 +18,31 @@ import {
 
 export const useInvisibilityDossier = (): InvisibilityDossierModel => {
   const router = useRouter();
-  const [messages, setMessages] = useState(SCRIPT.slice(0, 0));
+  const { t } = useLanguage();
+
+  // Build translated script from SCRIPT template
+  const translatedScript = useMemo(
+    () =>
+      SCRIPT.map((msg) => ({
+        ...msg,
+        text: msg.text ? t(`msg${msg.id}`) : undefined,
+        title: msg.title ? t(`audio${msg.id}`) : undefined,
+      })),
+    [t],
+  );
+
+  const labels = useMemo(
+    () => ({
+      online: t("online"),
+      message: t("message"),
+      transcribe: t("transcribe"),
+      openingRevelation: t("openingRevelation"),
+      accessRevelation: t("accessRevelation"),
+    }),
+    [t],
+  );
+
+  const [messages, setMessages] = useState<Message[]>([]);
   const [isTyping, setIsTyping] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
@@ -80,7 +105,7 @@ export const useInvisibilityDossier = (): InvisibilityDossierModel => {
     if (!isWaitingForAudio || playingAudioId === null) return;
 
     // Get duration from the current audio message
-    const msg = SCRIPT.find((m) => m.id === playingAudioId);
+    const msg = translatedScript.find((m) => m.id === playingAudioId);
     const durationStr = msg?.duration ?? "0:45";
     const [min, sec] = durationStr.split(":").map(Number);
     const totalMs = (min * 60 + sec) * 1000;
@@ -99,9 +124,9 @@ export const useInvisibilityDossier = (): InvisibilityDossierModel => {
 
   // ── Step driver: shows messages one by one ──
   useEffect(() => {
-    if (currentStep >= SCRIPT.length) return;
+    if (currentStep >= translatedScript.length) return;
 
-    const msg = SCRIPT[currentStep];
+    const msg = translatedScript[currentStep];
     if (!msg) return; // defensive: guard against out-of-bounds
 
     const showMessage = () => {
@@ -196,6 +221,7 @@ export const useInvisibilityDossier = (): InvisibilityDossierModel => {
     isTransitioning,
     playingAudioId,
     audioProgress,
+    labels,
     showPdfViewer,
     pdfPage,
     pdfFilename,

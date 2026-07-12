@@ -13,6 +13,14 @@ export interface Message {
   status?: "sent" | "delivered" | "read";
 }
 
+export interface DossierLabels {
+  online: string;
+  message: string;
+  transcribe: string;
+  openingRevelation: string;
+  accessRevelation: string;
+}
+
 export interface InvisibilityDossierModel {
   messages: Message[];
   isTyping: boolean;
@@ -22,6 +30,7 @@ export interface InvisibilityDossierModel {
   showPdfViewer: boolean;
   pdfPage: number;
   pdfFilename: string;
+  labels: DossierLabels;
   onAudioPlay: (id: number) => void;
   onOpenPdf: () => void;
   onClosePdf: () => void;

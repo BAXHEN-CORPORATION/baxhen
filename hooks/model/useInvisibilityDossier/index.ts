@@ -2,6 +2,7 @@ export { useInvisibilityDossier } from "./useInvisibilityDossier";
 export type {
   Message,
   InvisibilityDossierModel,
+  DossierLabels,
 } from "./useInvisibilityDossier.types";
 
 import type { HookManifest } from "@/lib/manifest/types";

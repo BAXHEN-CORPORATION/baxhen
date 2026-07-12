@@ -1,4 +1,4 @@
-import type { Message } from "@/hooks/model/useInvisibilityDossier";
+import type { Message, DossierLabels } from "@/hooks/model/useInvisibilityDossier";
 
 export interface WhatsAppScreenProps {
   messages: Message[];
@@ -9,6 +9,7 @@ export interface WhatsAppScreenProps {
   showPdfViewer: boolean;
   pdfPage: number;
   pdfFilename: string;
+  labels: DossierLabels;
   onAudioPlay: (id: number) => void;
   onOpenPdf: () => void;
   onClosePdf: () => void;

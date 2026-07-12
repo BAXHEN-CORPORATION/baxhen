@@ -127,12 +127,12 @@ const ActionGrid = ({
 // HangupButton
 // ---------------------------------------------------------------------------
 
-const HangupButton = ({ onClick }: { onClick?: () => void }) => (
+const HangupButton = ({ onClick, ariaLabel }: { onClick?: () => void; ariaLabel: string }) => (
   <div className="flex flex-shrink-0 flex-col items-center pb-12">
     <motion.button
       onClick={onClick}
       className="flex h-[72px] w-[72px] items-center justify-center rounded-full bg-[#FF3B30] focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2 focus:ring-offset-black"
-      aria-label="End call"
+      aria-label={ariaLabel}
       whileTap={{ scale: 0.88 }}
       style={{ cursor: "pointer" }}
     >
@@ -167,6 +167,7 @@ export const IPhoneCallScreen = ({
   formattedDuration,
   showRedirect,
   callButtons,
+  labels,
   onAnswer,
   onEndCall,
   onToggleMute,
@@ -193,7 +194,7 @@ export const IPhoneCallScreen = ({
           {/* TOP */}
           <div className="flex flex-col items-center gap-5 pt-10">
             <p className="text-xs uppercase tracking-[0.22em] text-white/50">
-              Incoming call
+              {labels.incomingCall}
             </p>
             <IncomingAvatar />
             <IncomingCallerInfo />
@@ -203,7 +204,7 @@ export const IPhoneCallScreen = ({
           <div className="flex flex-1 flex-col items-center justify-center gap-2">
             <Volume2 className="h-5 w-5 text-white/30" aria-hidden="true" />
             <p className="max-w-[180px] break-words text-center text-xs hyphens-auto text-white/30">
-              Turn up the volume to hear
+              {labels.volumeHint}
             </p>
           </div>
 
@@ -214,14 +215,14 @@ export const IPhoneCallScreen = ({
               <motion.button
                 onClick={onEndCall}
                 className="flex h-[72px] w-[72px] items-center justify-center rounded-full bg-[#FF3B30] focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2 focus:ring-offset-black"
-                aria-label="Decline call"
+                aria-label={labels.endCall}
                 whileTap={{ scale: 0.88 }}
                 style={{ cursor: "pointer" }}
               >
                 <PhoneOff size={32} className="text-white" aria-hidden="true" />
               </motion.button>
               <span className="text-xs font-light tracking-wide text-white/50">
-                Decline
+                {labels.decline}
               </span>
             </div>
 
@@ -250,7 +251,7 @@ export const IPhoneCallScreen = ({
                 <motion.button
                   onClick={onAnswer}
                   className="relative z-10 flex h-[72px] w-[72px] items-center justify-center rounded-full bg-[#34C759] focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 focus:ring-offset-black"
-                  aria-label="Answer call"
+                  aria-label={labels.answer}
                   whileTap={{ scale: 0.88 }}
                   style={{
                     boxShadow: "0 0 28px rgba(52,199,89,0.5)",
@@ -261,7 +262,7 @@ export const IPhoneCallScreen = ({
                 </motion.button>
               </div>
               <span className="text-xs font-light tracking-wide text-white/50">
-                Answer
+                {labels.answer}
               </span>
             </div>
           </div>
@@ -278,7 +279,7 @@ export const IPhoneCallScreen = ({
             onToggleMute={onToggleMute}
             onToggleSpeaker={onToggleSpeaker}
           />
-          <HangupButton onClick={onEndCall} />
+          <HangupButton onClick={onEndCall} ariaLabel={labels.endCall} />
         </div>
       )}
 
@@ -293,7 +294,7 @@ export const IPhoneCallScreen = ({
           </div>
           <div className="flex flex-col items-center gap-1 text-center">
             <p className="text-lg font-medium text-white/65">
-              Call disconnected
+              {labels.callDisconnected}
             </p>
             <p className="text-sm tabular-nums text-zinc-600">
               {formattedDuration}
@@ -317,7 +318,7 @@ export const IPhoneCallScreen = ({
                 ))}
               </div>
               <p className="text-center text-sm text-white/40">
-                New message from BAXHEN
+                {labels.newMessage}
               </p>
             </div>
           )}
