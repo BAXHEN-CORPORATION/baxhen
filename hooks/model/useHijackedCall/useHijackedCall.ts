@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback, useMemo } from "react";
+import { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useCallAudio } from "@/hooks/useCallAudio";
 import { useLanguage } from "@/hooks/useLanguage";
@@ -40,10 +40,14 @@ export const useHijackedCall = (): HijackedCallModel => {
   // ── Active call audio — auto-ends when finished ──
   const handleEndCall = useCallback(() => setCallState("ended"), []);
 
-  useCallAudio(ACTIVE_AUDIO_PATH, {
+  const activeAudio = useCallAudio(ACTIVE_AUDIO_PATH, {
     enabled: callState === "active",
     onEnded: handleEndCall,
   });
+
+  // Keep playNow stable across renders
+  const playNowRef = useRef(activeAudio.playNow);
+  playNowRef.current = activeAudio.playNow;
 
   // ── Call-end beep × 3 ──
   useEffect(() => {
@@ -89,11 +93,14 @@ export const useHijackedCall = (): HijackedCallModel => {
 
   // ── Actions ──
   const onAnswer = useCallback(() => {
-    // Request fullscreen on answer
+    // Play audio synchronously within user-gesture context
+    playNowRef.current();
+    setCallState("active");
+
+    // Request fullscreen after audio starts
     if (document.documentElement.requestFullscreen) {
       document.documentElement.requestFullscreen().catch(() => {});
     }
-    setCallState("active");
   }, []);
   const onToggleMute = useCallback(() => setIsMuted((v) => !v), []);
   const onToggleSpeaker = useCallback(() => setIsSpeaker((v) => !v), []);

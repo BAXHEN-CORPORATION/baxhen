@@ -13,6 +13,7 @@ interface UseCallAudioOptions {
 
 interface UseCallAudioReturn {
   retryPlay: () => void;
+  playNow: () => void;
   hasStarted: boolean;
   showFallback: boolean;
   isActive: boolean;
@@ -34,7 +35,7 @@ export function useCallAudio(
   const [showFallback, setShowFallback] = useState(false);
   const [isActive, setIsActive] = useState(false);
 
-  // Refs keep callbacks stable — no new array/boolean reference on each render
+  // Refs keep callbacks stable
   const vibrateRef = useRef(vibrate);
   const vibratePatternRef = useRef(vibratePattern);
   const onEndedRef = useRef(onEnded);
@@ -42,7 +43,7 @@ export function useCallAudio(
   vibratePatternRef.current = vibratePattern;
   onEndedRef.current = onEnded;
 
-  const playAudio = useCallback((): HTMLAudioElement => {
+  const createAudio = useCallback((): HTMLAudioElement => {
     const audio = new Audio(src);
     audio.loop = loop;
 
@@ -72,18 +73,18 @@ export function useCallAudio(
       onEndedRef.current?.();
     });
 
-    audio.play().catch(() => {
-      setShowFallback(true);
-    });
-
     return audio;
   }, [src, loop]);
 
   useEffect(() => {
     if (!enabled || !src) return;
 
-    const audio = playAudio();
+    const audio = createAudio();
     audioRef.current = audio;
+
+    audio.play().catch(() => {
+      setShowFallback(true);
+    });
 
     if (!repeatInterval) {
       return () => {
@@ -95,7 +96,9 @@ export function useCallAudio(
 
     const interval = setInterval(() => {
       audioRef.current?.pause();
-      audioRef.current = playAudio();
+      const next = createAudio();
+      audioRef.current = next;
+      next.play().catch(() => {});
     }, repeatInterval);
 
     return () => {
@@ -110,7 +113,7 @@ export function useCallAudio(
         navigator.vibrate(0);
       }
     };
-  }, [enabled, src, loop, repeatInterval, playAudio]);
+  }, [enabled, src, loop, repeatInterval, createAudio]);
 
   const retryPlay = useCallback(() => {
     if (!audioRef.current || !audioRef.current.paused) return;
@@ -127,5 +130,27 @@ export function useCallAudio(
       });
   }, []);
 
-  return { retryPlay, hasStarted, showFallback, isActive };
+  // Synchronous play — creates audio and plays immediately (for user-gesture context)
+  const playNow = useCallback(() => {
+    // Clean up existing audio if any
+    if (audioRef.current) {
+      audioRef.current.pause();
+    }
+
+    const audio = createAudio();
+    audioRef.current = audio;
+
+    audio
+      .play()
+      .then(() => {
+        setHasStarted(true);
+        setShowFallback(false);
+        setIsActive(true);
+      })
+      .catch(() => {
+        setShowFallback(true);
+      });
+  }, [createAudio]);
+
+  return { retryPlay, playNow, hasStarted, showFallback, isActive };
 }
