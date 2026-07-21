@@ -3,7 +3,6 @@
 import { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useCallAudio } from "@/hooks/useCallAudio";
-import { useLanguage } from "@/hooks/useLanguage";
 import type { CallButton } from "@/components/iphone-call-screen/iphone-call-screen.types";
 import { ACTION_BUTTONS } from "@/components/iphone-call-screen/iphone-call-screen.const";
 import type { CallState, HijackedCallModel } from "./useHijackedCall.types";
@@ -17,7 +16,6 @@ import { formatTime } from "./useHijackedCall.utils";
 
 export const useHijackedCall = (): HijackedCallModel => {
   const router = useRouter();
-  const { t } = useLanguage();
   const [callState, setCallState] = useState<CallState>("incoming");
   const [callSeconds, setCallSeconds] = useState(0);
   const [showRedirect, setShowRedirect] = useState(false);
@@ -110,27 +108,27 @@ export const useHijackedCall = (): HijackedCallModel => {
 
   const callButtons: CallButton[] = useMemo(
     () => [
-      { ...ACTION_BUTTONS[0], label: t("mute"), active: isMuted },
-      { ...ACTION_BUTTONS[1], label: t("keypad") },
-      { ...ACTION_BUTTONS[2], label: t("speaker"), active: isSpeaker },
-      { ...ACTION_BUTTONS[3], label: t("add") },
-      { ...ACTION_BUTTONS[4], label: t("facetime") },
-      { ...ACTION_BUTTONS[5], label: t("contacts") },
+      { ...ACTION_BUTTONS[0], active: isMuted },
+      ACTION_BUTTONS[1],
+      { ...ACTION_BUTTONS[2], active: isSpeaker },
+      ACTION_BUTTONS[3],
+      ACTION_BUTTONS[4],
+      ACTION_BUTTONS[5],
     ],
-    [isMuted, isSpeaker, t],
+    [isMuted, isSpeaker],
   );
 
   const labels = useMemo(
     () => ({
-      incomingCall: t("incomingCall"),
-      volumeHint: t("volumeHint"),
-      decline: t("decline"),
-      answer: t("answer"),
-      callDisconnected: t("callDisconnected"),
-      newMessage: t("newMessage"),
-      endCall: t("endCall"),
+      incomingCall: "Incoming call",
+      volumeHint: "Turn up the volume to hear",
+      decline: "Decline",
+      answer: "Answer",
+      callDisconnected: "Call disconnected",
+      newMessage: "New message from BAXHEN",
+      endCall: "End call",
     }),
-    [t],
+    [],
   );
 
   return {

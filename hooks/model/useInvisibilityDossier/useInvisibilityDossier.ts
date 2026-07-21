@@ -3,7 +3,6 @@
 import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { useCallAudio } from "@/hooks/useCallAudio";
-import { useLanguage } from "@/hooks/useLanguage";
 import type { InvisibilityDossierModel, Message } from "./useInvisibilityDossier.types";
 import {
   SCRIPT,
@@ -18,31 +17,17 @@ import {
 
 export const useInvisibilityDossier = (): InvisibilityDossierModel => {
   const router = useRouter();
-  const { t } = useLanguage();
-
-  // Build translated script from SCRIPT template
-  const translatedScript = useMemo(
-    () =>
-      SCRIPT.map((msg) => ({
-        ...msg,
-        text: msg.text ? t(`msg${msg.id}`) : undefined,
-        title: msg.title ? t(`audio${msg.id}`) : undefined,
-      })),
-    [t],
-  );
-
+  const [messages, setMessages] = useState<Message[]>([]);
   const labels = useMemo(
     () => ({
-      online: t("online"),
-      message: t("message"),
-      transcribe: t("transcribe"),
-      openingRevelation: t("openingRevelation"),
-      accessRevelation: t("accessRevelation"),
+      online: "Online",
+      message: "Message",
+      transcribe: "Transcribe",
+      openingRevelation: "Opening the revelation...",
+      accessRevelation: "ACCESS THE REVELATION",
     }),
-    [t],
+    [],
   );
-
-  const [messages, setMessages] = useState<Message[]>([]);
   const [isTyping, setIsTyping] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
@@ -105,7 +90,7 @@ export const useInvisibilityDossier = (): InvisibilityDossierModel => {
     if (!isWaitingForAudio || playingAudioId === null) return;
 
     // Get duration from the current audio message
-    const msg = translatedScript.find((m) => m.id === playingAudioId);
+    const msg = SCRIPT.find((m) => m.id === playingAudioId);
     const durationStr = msg?.duration ?? "0:45";
     const [min, sec] = durationStr.split(":").map(Number);
     const totalMs = (min * 60 + sec) * 1000;
@@ -124,9 +109,9 @@ export const useInvisibilityDossier = (): InvisibilityDossierModel => {
 
   // ── Step driver: shows messages one by one ──
   useEffect(() => {
-    if (currentStep >= translatedScript.length) return;
+    if (currentStep >= SCRIPT.length) return;
 
-    const msg = translatedScript[currentStep];
+    const msg = SCRIPT[currentStep];
     if (!msg) return; // defensive: guard against out-of-bounds
 
     const showMessage = () => {
